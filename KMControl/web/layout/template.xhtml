@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+
+        <link type="text/css" rel="stylesheet" href="css/estilo.css" />
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+
+        <title>KMControl</title>
+    </h:head>
+    <h:body class="body">
+        <f:view contentType="text/html">
+            <div class="divcenter">
+                <div class="col-md-12 column">
+                    <ui:insert name="header">
+                        <ui:include src="header.xhtml" />
+                    </ui:insert>
+                </div>
+                <div class="col-md-12 column">
+                    <ui:insert name="content"></ui:insert>
+                </div>
+                <div class="col-md-12 column">
+                    <ui:insert name="footer">
+                        <ui:include src="footer.xhtml" />
+                    </ui:insert>
+                </div>
+            </div>
+        </f:view>
+    </h:body>
+</html>

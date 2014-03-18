@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/layout/template.xhtml">
+        <ui:define name="content">
+            <br/>
+            <br/>
+            <center>
+                <h:form>
+                    <p:panel id="panel" header="Acesso Restrito" style="margin-bottom:10px; width: 350px;">  
+                        <p:panelGrid columns="2">  
+                            
+                            <h:outputLabel for="login" value="Login: " />  
+                            <p:inputText id="login" label="login" value="#{usuarioController.usuario.login}"/>  
+
+                            <h:outputLabel for="senha" value="Senha: " />  
+                            <p:password id="senha" label="senha" value="#{usuarioController.usuario.senha}"/>  
+
+                        </p:panelGrid> 
+                        <p:commandButton value="Login" action="#{usuarioController.autenticar()}" ajax="false" style="margin-top: 5px;"/>  
+                        <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
+                    </p:panel>
+                </h:form>    
+            </center>
+            <br/>
+            <br/>
+        </ui:define>
+    </ui:composition>
+</html>
