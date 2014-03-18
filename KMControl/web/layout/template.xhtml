@@ -8,25 +8,29 @@
         <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
 
         <link type="text/css" rel="stylesheet" href="css/estilo.css" />
-        <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.css" />
 
         <title>KMControl</title>
     </h:head>
     <h:body class="body">
         <f:view contentType="text/html">
             <div class="divcenter">
-                <div class="col-md-12 column">
-                    <ui:insert name="header">
-                        <ui:include src="header.xhtml" />
-                    </ui:insert>
+                <div class="container">
+                    <div class="row">
+                        <ui:insert name="header"></ui:insert>
+                    </div>
                 </div>
-                <div class="col-md-12 column">
-                    <ui:insert name="content"></ui:insert>
+                <div class="container">
+                    <div class="row">
+                        <ui:insert name="content"></ui:insert>
+                    </div>
                 </div>
-                <div class="col-md-12 column">
-                    <ui:insert name="footer">
-                        <ui:include src="footer.xhtml" />
-                    </ui:insert>
+                <div class="container">
+                    <div class="row">
+                        <ui:insert name="footer">
+                            <ui:include src="footer.xhtml" />
+                        </ui:insert>
+                    </div>
                 </div>
             </div>
         </f:view>
