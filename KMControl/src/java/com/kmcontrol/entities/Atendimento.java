@@ -23,8 +23,8 @@ public class Atendimento implements java.io.Serializable {
     private Integer chamado;
     private String origem;
     private String destino;
-    private int kminicial;
-    private int kmfinal;
+    private Integer kminicial;
+    private Integer kmfinal;
     private String obsAtendimento;
     private String motivoAlteracao;
     private Boolean aprovado;
@@ -41,7 +41,7 @@ public class Atendimento implements java.io.Serializable {
     public Atendimento() {
     }
 
-    public Atendimento(Usuario usuario, Date data, String origem, String destino, int kminicial, int kmfinal) {
+    public Atendimento(Usuario usuario, Date data, String origem, String destino, Integer kminicial, Integer kmfinal) {
         this.usuario = usuario;
         this.data = data;
         this.origem = origem;
@@ -50,7 +50,7 @@ public class Atendimento implements java.io.Serializable {
         this.kmfinal = kmfinal;
     }
 
-    public Atendimento(Usuario usuario, Date data, Integer chamado, String origem, String destino, int kminicial, int kmfinal, String obsAtendimento, String motivoAlteracao, Boolean aprovado, Boolean pago, Integer qtdHospedagem, Double valorHospedagem, Integer qtdPedagio, Double valorPedagio, Integer qtdEstacionamento, Double valorEstacionamento, Integer qtdAlimentacao, Double valorAlimentacao) {
+    public Atendimento(Usuario usuario, Date data, Integer chamado, String origem, String destino, Integer kminicial, Integer kmfinal, String obsAtendimento, String motivoAlteracao, Boolean aprovado, Boolean pago, Integer qtdHospedagem, Double valorHospedagem, Integer qtdPedagio, Double valorPedagio, Integer qtdEstacionamento, Double valorEstacionamento, Integer qtdAlimentacao, Double valorAlimentacao) {
         this.usuario = usuario;
         this.data = data;
         this.chamado = chamado;
@@ -131,20 +131,20 @@ public class Atendimento implements java.io.Serializable {
     }
 
     @Column(name = "kminicial", nullable = false)
-    public int getKminicial() {
+    public Integer getKminicial() {
         return this.kminicial;
     }
 
-    public void setKminicial(int kminicial) {
+    public void setKminicial(Integer kminicial) {
         this.kminicial = kminicial;
     }
 
     @Column(name = "kmfinal", nullable = false)
-    public int getKmfinal() {
+    public Integer getKmfinal() {
         return this.kmfinal;
     }
 
-    public void setKmfinal(int kmfinal) {
+    public void setKmfinal(Integer kmfinal) {
         this.kmfinal = kmfinal;
     }
 

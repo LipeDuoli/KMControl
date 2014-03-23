@@ -45,7 +45,7 @@ public class UsuarioControllerTest {
 
     @Test
     public void testInserirUsuario() {
-        Usuario u = new Usuario("teste", "login2", "senha", false, true);
+        Usuario u = new Usuario("teste", "login2", "senha", false, true, "11111111111", "bb", 1112215, 122535);
         UsuarioController uc = new UsuarioController();
         uc.setUsuario(u);
         uc.inserirUsuario();

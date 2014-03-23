@@ -9,28 +9,23 @@
         <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
         <link type="text/css" rel="stylesheet" href="css/estilo.css" />
         <link type="text/css" rel="stylesheet" href="css/bootstrap.css" />
+        <script src="js/bootstrap.min.js"></script>
         <title>KMControl</title>
     </h:head>
     <h:body>
         <div class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <img src="img/logo.jpg" width="250" height="50"></img>
+                    <img src="img/logo2.png" ></img>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nome da pessoa <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Logout</a></li>
-                            </ul>
-                        </li>
+                        <h:form style="padding-top: 15px">
+                            <p:splitButton value="Nome do caboclo" > 
+                                <p:menuitem value="Alterar Dados" actionListener="#{buttonBean.update}" />
+                                <p:menuitem value="Logout" actionListener="#{buttonBean.update}" />  
+                            </p:splitButton>  
+                        </h:form>
                     </ul>
                 </div>
             </div>
@@ -38,15 +33,115 @@
 
         <div class="container">
             <div class="row">
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <p>Index coordenador</p>
+                <p:tabView id="tabs">
+                    <p:tab title="Lista de Chamados">
+                        <h:form>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <p class="text-right">Técnico: </p>
+                                </div>
+                                <div class="col-md-2">
+                                    <p:selectOneMenu value=""></p:selectOneMenu>
+                                </div>
+                                <div class="col-md-2">
+                                    <p class="text-right">Data Inicial</p>  
+                                </div>
+                                <div class="col-md-2">
+                                    <p:calendar value="#{atendimentoController.atendimento.data}" />  
+                                </div>
+                                <div class="col-md-2">
+                                    <p class="text-right">Data Final</p>  
+                                </div>
+                                <div class="col-md-2">
+                                    <p:calendar value="#{atendimentoController.atendimento.data}" />  
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p:dataTable value="" var="reg">
+                                    <p:column headerText="Data">
+                                        <h:outputText value="12/12/12"/>
+                                    </p:column>
+                                    <p:column headerText="Chamado">
+                                        <h:outputText value="00000000" />
+                                    </p:column>
+                                    <p:column headerText="Origem">
+                                        <h:outputText value="ac aaa"/>
+                                    </p:column>
+                                    <p:column headerText="Destino">
+                                        <h:outputText value="ac bbb"/>
+                                    </p:column>
+                                    <p:column headerText="KM Inicial">
+                                        <h:outputText value="1231323"/>
+                                    </p:column>
+                                    <p:column headerText="KM Final">
+                                        <h:outputText value="554255"/>
+                                    </p:column>
+                                    <p:column headerText="KM Rodado">
+                                        <h:outputText value="656565"/>
+                                    </p:column>
+                                    <p:column>
+                                        <center><p:commandButton icon="ui-icon-newwin" /></center>
+                                    </p:column>
+                                </p:dataTable>
+                            </div>
+                        </h:form>
+                    </p:tab>
+                    <p:tab title="Cadastro de Usuario">
+                        <h:form>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <p>Nome:</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p:inputText required="true" value="#{usuarioController.usuario.nome}"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <p>Usuario:</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p:inputText required="true" value="#{usuarioController.usuario.login}"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <p>Senha:</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p:password id="pwd1" value="#{usuarioController.usuario.senha}" match="pwd2" required="true"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <p>Confirma Senha:</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p:password id="pwd2" value="#{usuarioController.usuario.senha}" required="true"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <p>Tipo:</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p:selectOneMenu value="#{usuarioController.usuario.coordenador}">  
+                                        <f:selectItem itemLabel="Coordenador" itemValue="true" />  
+                                        <f:selectItem itemLabel="Técnico" itemValue="false" />  
+                                    </p:selectOneMenu> 
+                                </div>
+                            </div>
+                            <div class="row">
+                                <br/>
+                                <div class="col-md-offset-1">
+                                    <p:commandButton value="Cadastrar" action="#{usuarioController.inserirUsuario()}" ajax="false"/>
+                                </div>
+                            </div>
+                            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
+                        </h:form>
+                    </p:tab>
+                </p:tabView>
             </div>
         </div>
-
     </h:body>
 </html>
-

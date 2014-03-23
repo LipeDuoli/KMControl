@@ -26,12 +26,11 @@ public class Usuario implements java.io.Serializable {
     public Usuario() {
     }
 
-    public Usuario(String nome, String login, String senha, boolean coordenador, boolean carroparticular) {
+    public Usuario(String nome, String login, String senha, boolean coordenador) {
         this.nome = nome;
         this.login = login;
         this.senha = senha;
         this.coordenador = coordenador;
-        this.carroparticular = carroparticular;
     }
 
     public Usuario(String nome, String login, String senha, boolean coordenador, boolean carroparticular, String cpf, String nomeBanco, Integer conta, Integer agencia) {
@@ -93,7 +92,7 @@ public class Usuario implements java.io.Serializable {
         this.coordenador = coordenador;
     }
 
-    @Column(name = "carroparticular", nullable = false)
+    @Column(name = "carroparticular", nullable = true)
     public boolean isCarroparticular() {
         return this.carroparticular;
     }

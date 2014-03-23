@@ -1,14 +1,4 @@
-html, body, .divcenter { height: 99.6%;} 
-
-.body{
-    background:gray;
+body {
+    min-height: 2000px;
+    padding-top: 70px;
 }
-
-.divcenter {
-    background:#f8f8f8;
-    margin: 4px;
-    -moz-border-radius: 8px;
-    -webkit-border-radius: 8px;
-    border-radius: 8px;
-}
-
