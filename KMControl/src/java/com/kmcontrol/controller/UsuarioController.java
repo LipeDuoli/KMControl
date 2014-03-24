@@ -32,6 +32,11 @@ public class UsuarioController {
         dao = new UsuarioDao();
         return dao.listarTodos();
     }
+    
+    public List getListaTecnicos() {
+        dao = new UsuarioDao();
+        return dao.listarTecnicos();
+    }
 
     public void inserirUsuario() {
         dao = new UsuarioDao();

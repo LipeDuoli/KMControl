@@ -85,4 +85,17 @@ public class UsuarioDao implements IDao {
         }
     }
 
+    public List<Object> listarTecnicos() {
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("FROM Usuario u WHERE u.coordenador = false");
+            return query.list();
+        } catch (HibernateException he) {
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+
 }

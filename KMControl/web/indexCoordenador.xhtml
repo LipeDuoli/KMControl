@@ -41,7 +41,9 @@
                                     <p class="text-right">Técnico: </p>
                                 </div>
                                 <div class="col-md-2">
-                                    <p:selectOneMenu value=""></p:selectOneMenu>
+                                    <p:selectOneMenu>
+                                        <f:selectItems value="#{usuarioController.listaTecnicos}" var="tecnicos" itemLabel="#{tecnicos.nome}"/> 
+                                    </p:selectOneMenu>
                                 </div>
                                 <div class="col-md-2">
                                     <p class="text-right">Data Inicial</p>  
