@@ -36,14 +36,67 @@
             </div>
         </div>
 
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <p>Index tecnico</p>
+                <p:tabView id="tabs">
+                    <p:tab title="Meus Chamados">
+                        <h:form>
+                            <div class="row">
+                                <p:dataTable value="" var="reg">
+                                    <p:column headerText="Data">
+                                        <h:outputText value="12/12/12"/>
+                                    </p:column>
+                                    <p:column headerText="Chamado">
+                                        <h:outputText value="00000000" />
+                                    </p:column>
+                                    <p:column headerText="Origem">
+                                        <h:outputText value="ac aaa"/>
+                                    </p:column>
+                                    <p:column headerText="Destino">
+                                        <h:outputText value="ac bbb"/>
+                                    </p:column>
+                                    <p:column headerText="KM Inicial">
+                                        <h:outputText value="1231323"/>
+                                    </p:column>
+                                    <p:column headerText="KM Final">
+                                        <h:outputText value="554255"/>
+                                    </p:column>
+                                    <p:column headerText="KM Rodado">
+                                        <h:outputText value="656565"/>
+                                    </p:column>
+                                    <p:column>
+                                        <center><p:commandButton icon="ui-icon-newwin" /></center>
+                                    </p:column>
+                                </p:dataTable>
+                            </div>
+                        </h:form>
+                    </p:tab>
+                    <p:tab title="Cadastro de Chamados">
+                        <h:form>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <p>Data:</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p:calendar value="#{atendimentoController.atendimento.data}" />
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p>Numero Chamado:</p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p:inputText value="#{atendimentoController.atendimento.chamado}" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+
+                                </div>
+                            </div>
+                        </h:form>
+                    </p:tab>
+                </p:tabView>
             </div>
         </div>
 
