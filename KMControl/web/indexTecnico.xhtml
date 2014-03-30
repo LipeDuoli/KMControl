@@ -10,6 +10,14 @@
         <link type="text/css" rel="stylesheet" href="css/estilo.css" />
         <link type="text/css" rel="stylesheet" href="css/bootstrap.css" />
         <title>KMControl</title>
+        <style>
+            .ui-widget-content {
+                border-style: none;
+            }
+            .ui-panelgrid td {
+                border-style: none;
+            }
+        </style>
     </h:head>
     <h:body>
         <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -74,25 +82,20 @@
                     <p:tab title="Cadastro de Chamados">
                         <h:form>
                             <div class="row">
-                                <div class="col-md-8">
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <p>Data:</p>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <p:calendar value="#{atendimentoController.atendimento.data}" />
-                                        </div>
-                                        <div class="col-md-3">
-                                            <p>Numero Chamado:</p>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <p:inputText value="#{atendimentoController.atendimento.chamado}" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-
-                                </div>
+                                <p:panelGrid style="height: 100%">
+                                    <p:row>
+                                        <p:column colspan="2">Data: </p:column>
+                                        <p:column colspan="10"><p:calendar value="#{atendimentoController.atendimento.data}" /> </p:column>
+                                        <p:column colspan="3">Numero Chamado: </p:column>
+                                        <p:column><p:inputText value="#{atendimentoController.atendimento.chamado}"/></p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="2">Origem: </p:column>
+                                        <p:column colspan="13"><p:inputText value="#{atendimentoController.atendimento.origem}"/></p:column>
+                                        <p:column colspan="2">Destino: </p:column>
+                                        <p:column><p:inputText value="#{atendimentoController.atendimento.destino}"/></p:column>
+                                    </p:row>
+                                </p:panelGrid>
                             </div>
                         </h:form>
                     </p:tab>
