@@ -10,6 +10,7 @@
         <link type="text/css" rel="stylesheet" href="css/estilo.css" />
         <link type="text/css" rel="stylesheet" href="css/bootstrap.css" />
         <script src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/locale.js"></script>
         <title>KMControl</title>
     </h:head>
     <h:body>
@@ -139,7 +140,7 @@
                                     <p:commandButton value="Cadastrar" action="#{usuarioController.inserirUsuario()}" ajax="false"/>
                                 </div>
                             </div>
-                            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
+                            <p:messages id="messages" autoUpdate="true" closable="true"/>
                         </h:form>
                     </p:tab>
                 </p:tabView>

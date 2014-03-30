@@ -1,4 +1,9 @@
 body {
-    min-height: 2000px;
     padding-top: 70px;
+}
+.ui-widget-content {
+    border-style: none;
+}
+.ui-panelgrid td {
+    border-style: none;
 }

@@ -9,15 +9,9 @@
         <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
         <link type="text/css" rel="stylesheet" href="css/estilo.css" />
         <link type="text/css" rel="stylesheet" href="css/bootstrap.css" />
+        <script src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/locale.js"></script>
         <title>KMControl</title>
-        <style>
-            .ui-widget-content {
-                border-style: none;
-            }
-            .ui-panelgrid td {
-                border-style: none;
-            }
-        </style>
     </h:head>
     <h:body>
         <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -29,7 +23,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <img src="img/logo.jpg" width="250" height="50"></img>
+                    <img src="img/logo2.png"></img>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -82,18 +76,78 @@
                     <p:tab title="Cadastro de Chamados">
                         <h:form>
                             <div class="row">
-                                <p:panelGrid style="height: 100%">
+                                <p:panelGrid>
                                     <p:row>
-                                        <p:column colspan="2">Data: </p:column>
-                                        <p:column colspan="10"><p:calendar value="#{atendimentoController.atendimento.data}" /> </p:column>
-                                        <p:column colspan="3">Numero Chamado: </p:column>
-                                        <p:column><p:inputText value="#{atendimentoController.atendimento.chamado}"/></p:column>
+                                        <p:column>Data:* </p:column>
+                                        <p:column><p:calendar value="#{atendimentoController.atendimento.data}" required="true" label="Data" id="Data" locale="pt"/> </p:column>
+                                        <p:column>Chamado:* </p:column>
+                                        <p:column><p:inputText value="#{atendimentoController.atendimento.chamado}" required="true" label="Chamado" id="Chamado"/></p:column>
+                                        <p:column>OBS Atendimento: </p:column>
                                     </p:row>
                                     <p:row>
-                                        <p:column colspan="2">Origem: </p:column>
-                                        <p:column colspan="13"><p:inputText value="#{atendimentoController.atendimento.origem}"/></p:column>
-                                        <p:column colspan="2">Destino: </p:column>
-                                        <p:column><p:inputText value="#{atendimentoController.atendimento.destino}"/></p:column>
+                                        <p:column>Origem:* </p:column>
+                                        <p:column colspan="3"><p:inputText value="#{atendimentoController.atendimento.origem}" size="62" required="true" label="Origem" id="Origem"/></p:column>
+                                        <p:column rowspan="3"><p:inputTextarea rows="5" cols="40" maxlength="255" autoResize="false" value="#{atendimentoController.atendimento.obsAtendimento}"/></p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>Destino:* </p:column>
+                                        <p:column colspan="3"><p:inputText value="#{atendimentoController.atendimento.destino}" size="62" required="true" label="Destino" id="Destino"/></p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>KM Inicial:* </p:column>
+                                        <p:column><p:inputText value="#{atendimentoController.atendimento.kminicial}" required="true" label="KMInicial" id="KMInicial"/></p:column>
+                                        <p:column>KM Final:* </p:column>
+                                        <p:column><p:inputText value="#{atendimentoController.atendimento.kmfinal}" required="true" label="KMFinal" id="KMFinal"/></p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="5">
+                                            <p:spacer />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="3">Hospedagem</p:column>
+                                        <p:column>Estacionamento</p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column><p:spinner value="#{atendimentoController.atendimento.qtdHospedagem}" min="0" size="1"/></p:column>
+                                        <p:column colspan="2">
+                                            <p:inputText value="#{atendimentoController.atendimento.valorHospedagem}" label="ValorHospedagem" id="ValorHospedagem" />
+                                            <p:watermark for="ValorHospedagem" value="Valor"/>
+                                        </p:column>
+                                        <p:column colspan="2">
+                                            <p:spinner value="#{atendimentoController.atendimento.qtdEstacionamento}" min="0" size="1" />
+                                            <p:spacer style="padding-right: 20px"/>
+                                            <p:inputText value="#{atendimentoController.atendimento.valorEstacionamento}" label="ValorEstacionamento" id="ValorEstacionamento" />
+                                            <p:watermark for="ValorEstacionamento" value="Valor"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="3">Pedagio</p:column>
+                                        <p:column>Alimentação</p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column><p:spinner value="#{atendimentoController.atendimento.qtdPedagio}" min="0" size="1"/></p:column>
+                                        <p:column colspan="2">
+                                            <p:inputText value="#{atendimentoController.atendimento.valorPedagio}" label="ValorPedagio" id="ValorPedagio" />
+                                            <p:watermark for="ValorPedagio" value="Valor"/>
+                                        </p:column>
+                                        <p:column colspan="2">
+                                            <p:spinner value="#{atendimentoController.atendimento.qtdAlimentacao}" min="0" size="1" />
+                                            <p:spacer style="padding-right: 20px"/>
+                                            <p:inputText value="#{atendimentoController.atendimento.valorAlimentacao}" label="ValorAlimentação" id="ValorAlimentação" />
+                                            <p:watermark for="ValorAlimentação" value="Valor"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="5">
+                                            <p:spacer />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="3"><p:commandButton value="Cadastrar Chamado" ajax="false"/></p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="5"><p:messages id="messages" autoUpdate="true" closable="true"/></p:column>
                                     </p:row>
                                 </p:panelGrid>
                             </div>
