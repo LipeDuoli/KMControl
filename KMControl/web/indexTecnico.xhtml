@@ -79,29 +79,29 @@
                                 <p:panelGrid>
                                     <p:row>
                                         <p:column>Data:* </p:column>
-                                        <p:column><p:calendar value="#{atendimentoController.atendimento.data}" required="true" label="Data" id="Data" locale="pt"/> </p:column>
+                                        <p:column><p:calendar value="#{atendimentoController.atendimento.data}" required="true" label="Data" id="data" locale="pt"/> </p:column>
                                         <p:column>Chamado:* </p:column>
-                                        <p:column><p:inputText value="#{atendimentoController.atendimento.chamado}" required="true" label="Chamado" id="Chamado"/></p:column>
+                                        <p:column><p:inputText value="#{atendimentoController.atendimento.chamado}" required="true" label="Chamado" id="chamado"/></p:column>
                                         <p:column>OBS Atendimento: </p:column>
                                     </p:row>
                                     <p:row>
                                         <p:column>Origem:* </p:column>
-                                        <p:column colspan="3"><p:inputText value="#{atendimentoController.atendimento.origem}" size="62" required="true" label="Origem" id="Origem"/></p:column>
+                                        <p:column colspan="3"><p:inputText value="#{atendimentoController.atendimento.origem}" size="62" required="true" label="Origem" id="origem"/></p:column>
                                         <p:column rowspan="3"><p:inputTextarea rows="5" cols="40" maxlength="255" autoResize="false" value="#{atendimentoController.atendimento.obsAtendimento}"/></p:column>
                                     </p:row>
                                     <p:row>
                                         <p:column>Destino:* </p:column>
-                                        <p:column colspan="3"><p:inputText value="#{atendimentoController.atendimento.destino}" size="62" required="true" label="Destino" id="Destino"/></p:column>
+                                        <p:column colspan="3"><p:inputText value="#{atendimentoController.atendimento.destino}" size="62" required="true" label="Destino" id="destino"/></p:column>
                                     </p:row>
                                     <p:row>
                                         <p:column>KM Inicial:* </p:column>
-                                        <p:column><p:inputText value="#{atendimentoController.atendimento.kminicial}" required="true" label="KMInicial" id="KMInicial"/></p:column>
+                                        <p:column><p:inputText value="#{atendimentoController.atendimento.kminicial}" required="true" label="KM Inicial" id="kminicial"/></p:column>
                                         <p:column>KM Final:* </p:column>
-                                        <p:column><p:inputText value="#{atendimentoController.atendimento.kmfinal}" required="true" label="KMFinal" id="KMFinal"/></p:column>
+                                        <p:column><p:inputText value="#{atendimentoController.atendimento.kmfinal}" required="true" label="KM Final" id="kmfinal"/></p:column>
                                     </p:row>
                                     <p:row>
                                         <p:column colspan="5">
-                                            <p:spacer />
+                                            <p:separator id="separator"/>
                                         </p:column>
                                     </p:row>
                                     <p:row>

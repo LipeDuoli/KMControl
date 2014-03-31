@@ -38,26 +38,20 @@
                     <p:tab title="Lista de Chamados">
                         <h:form>
                             <div class="row">
-                                <div class="col-md-2">
-                                    <p class="text-right">Técnico: </p>
-                                </div>
-                                <div class="col-md-2">
-                                    <p:selectOneMenu>
-                                        <f:selectItems value="#{usuarioController.listaTecnicos}" var="tecnicos" itemLabel="#{tecnicos.nome}"/> 
-                                    </p:selectOneMenu>
-                                </div>
-                                <div class="col-md-2">
-                                    <p class="text-right">Data Inicial</p>  
-                                </div>
-                                <div class="col-md-2">
-                                    <p:calendar value="#{atendimentoController.atendimento.data}" />  
-                                </div>
-                                <div class="col-md-2">
-                                    <p class="text-right">Data Final</p>  
-                                </div>
-                                <div class="col-md-2">
-                                    <p:calendar value="#{atendimentoController.atendimento.data}" />  
-                                </div>
+                                <p:panelGrid>
+                                    <p:row>
+                                        <p:column>Técnico: </p:column>
+                                        <p:column>
+                                            <p:selectOneMenu>
+                                                <f:selectItems value="#{usuarioController.listaTecnicos}" var="tecnicos" itemLabel="#{tecnicos.nome}"/> 
+                                            </p:selectOneMenu>
+                                        </p:column>
+                                        <p:column>Data Inicial: </p:column>
+                                        <p:column><p:calendar value="#{atendimentoController.atendimento.data}" locale="pt"/></p:column>
+                                        <p:column>Data Final: </p:column>
+                                        <p:column><p:calendar value="#{atendimentoController.atendimento.data}" locale="pt"/></p:column>
+                                    </p:row>
+                                </p:panelGrid>
                             </div>
                             <div class="row">
                                 <p:dataTable value="" var="reg">
@@ -92,55 +86,70 @@
                     <p:tab title="Cadastro de Usuario">
                         <h:form>
                             <div class="row">
-                                <div class="col-md-1">
-                                    <p>Nome:</p>
-                                </div>
-                                <div class="col-md-3">
-                                    <p:inputText required="true" value="#{usuarioController.usuario.nome}"/>
-                                </div>
+                                <p:panelGrid>
+                                    <p:row>
+                                        <p:column>Nome:* </p:column>
+                                        <p:column><p:inputText required="true" value="#{usuarioController.usuario.nome}" label="Nome"/></p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>Login:* </p:column>
+                                        <p:column><p:inputText required="true" value="#{usuarioController.usuario.login}" label="Login"/></p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>Senha:* </p:column>
+                                        <p:column><p:password id="pwd1" value="#{usuarioController.usuario.senha}" match="pwd2" label="Senha" required="true"/></p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>Confirma Senha:* </p:column>
+                                        <p:column><p:password id="pwd2" value="#{usuarioController.usuario.senha}" required="true" label="Confirma Senha"/></p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>Tipo:* </p:column>
+                                        <p:column>
+                                            <p:selectOneMenu value="#{usuarioController.usuario.coordenador}" required="true" label="Tipo">  
+                                                <f:selectItem itemLabel="Coordenador" itemValue="true" />  
+                                                <f:selectItem itemLabel="Técnico" itemValue="false" />  
+                                            </p:selectOneMenu>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="5">
+                                            <p:separator id="separator"/>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>Tipo Carro: </p:column>
+                                        <p:column>
+                                            <p:selectOneMenu value="#{usuarioController.usuario.carroparticular}">  
+                                                <f:selectItem itemLabel="Particular" itemValue="true" />  
+                                                <f:selectItem itemLabel="Da empresa" itemValue="false" />  
+                                            </p:selectOneMenu>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>CPF: </p:column>
+                                        <p:column><p:inputText value="#{usuarioController.usuario.cpf}" label="CPF"/></p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>Banco: </p:column>
+                                        <p:column><p:inputText value="#{usuarioController.usuario.nomeBanco}" label="Banco"/></p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>Conta: </p:column>
+                                        <p:column><p:inputText value="#{usuarioController.usuario.conta}" label="Conta"/></p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>Agencia: </p:column>
+                                        <p:column><p:inputText value="#{usuarioController.usuario.agencia}" label="Agencia"/></p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="2"><p:commandButton value="Cadastrar" action="#{usuarioController.inserirUsuario()}" ajax="false"/></p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="2"><p:messages id="messages" autoUpdate="true" closable="true"/></p:column>
+                                    </p:row>
+                                </p:panelGrid>
                             </div>
-                            <div class="row">
-                                <div class="col-md-1">
-                                    <p>Usuario:</p>
-                                </div>
-                                <div class="col-md-3">
-                                    <p:inputText required="true" value="#{usuarioController.usuario.login}"/>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-1">
-                                    <p>Senha:</p>
-                                </div>
-                                <div class="col-md-3">
-                                    <p:password id="pwd1" value="#{usuarioController.usuario.senha}" match="pwd2" label="Senha" required="true"/>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-1">
-                                    <p>Confirma Senha:</p>
-                                </div>
-                                <div class="col-md-3">
-                                    <p:password id="pwd2" value="#{usuarioController.usuario.senha}" required="true" label="Confirma Senha"/>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-1">
-                                    <p>Tipo:</p>
-                                </div>
-                                <div class="col-md-3">
-                                    <p:selectOneMenu value="#{usuarioController.usuario.coordenador}">  
-                                        <f:selectItem itemLabel="Coordenador" itemValue="true" />  
-                                        <f:selectItem itemLabel="Técnico" itemValue="false" />  
-                                    </p:selectOneMenu> 
-                                </div>
-                            </div>
-                            <div class="row">
-                                <br/>
-                                <div class="col-md-offset-1">
-                                    <p:commandButton value="Cadastrar" action="#{usuarioController.inserirUsuario()}" ajax="false"/>
-                                </div>
-                            </div>
-                            <p:messages id="messages" autoUpdate="true" closable="true"/>
                         </h:form>
                     </p:tab>
                 </p:tabView>
