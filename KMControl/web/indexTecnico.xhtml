@@ -14,7 +14,7 @@
         <title>KMControl</title>
     </h:head>
     <h:body>
-        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -23,14 +23,17 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <img src="img/logo2.png"></img>
+                    <img src="img/logo2.png" style="padding-top: 8px"></img>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nome da pessoa <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><p:outputLabel value="#{usuarioController.usuario.nome}"/> <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Logout</a></li>
+                                <h:form>
+                                    <li><a><p:commandLink value="Alterar Dados" onclick="PF('alterausuario').show()" /></a></li>
+                                    <li><a><p:commandLink value="Logout" /></a></li>
+                                </h:form>
                             </ul>
                         </li>
                     </ul>
@@ -156,7 +159,77 @@
                 </p:tabView>
             </div>
         </div>
-
+        <div style="padding-top: 30px">
+        <p:dialog id="modalusuario" modal="true" header="Alterar Dados" widgetVar="alterausuario" resizable="false" width="600" height="485">
+            <h:form>
+                <div class="row">
+                    <p:panelGrid>
+                        <p:row>
+                            <p:column>Nome:* </p:column>
+                            <p:column><p:inputText required="true" value="#{usuarioController.usuario.nome}" label="Nome"/></p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>Login:* </p:column>
+                            <p:column><p:inputText required="true" value="#{usuarioController.usuario.login}" label="Login"/></p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>Senha:* </p:column>
+                            <p:column><p:password id="pwd1" value="#{usuarioController.usuario.senha}" match="pwd2" label="Senha" required="true"/></p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>Confirma Senha:* </p:column>
+                            <p:column><p:password id="pwd2" value="#{usuarioController.usuario.senha}" required="true" label="Confirma Senha"/></p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>Tipo:* </p:column>
+                            <p:column>
+                                <p:selectOneMenu value="#{usuarioController.usuario.coordenador}" required="true" label="Tipo">  
+                                    <f:selectItem itemLabel="Coordenador" itemValue="true" />  
+                                    <f:selectItem itemLabel="Técnico" itemValue="false" />  
+                                </p:selectOneMenu>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column colspan="5">
+                                <p:separator id="separator"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>Tipo Carro: </p:column>
+                            <p:column>
+                                <p:selectOneMenu value="#{usuarioController.usuario.carroparticular}">  
+                                    <f:selectItem itemLabel="Particular" itemValue="true" />  
+                                    <f:selectItem itemLabel="Da empresa" itemValue="false" />  
+                                </p:selectOneMenu>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>CPF: </p:column>
+                            <p:column><p:inputText value="#{usuarioController.usuario.cpf}" label="CPF"/></p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>Banco: </p:column>
+                            <p:column><p:inputText value="#{usuarioController.usuario.nomeBanco}" label="Banco"/></p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>Conta: </p:column>
+                            <p:column><p:inputText value="#{usuarioController.usuario.conta}" label="Conta"/></p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>Agencia: </p:column>
+                            <p:column><p:inputText value="#{usuarioController.usuario.agencia}" label="Agencia"/></p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column colspan="2"><p:commandButton value="Cadastrar" action="#{usuarioController.inserirUsuario()}" ajax="false"/></p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column colspan="2"><p:messages id="messages" autoUpdate="true" closable="true"/></p:column>
+                        </p:row>
+                    </p:panelGrid>
+                </div>
+            </h:form>
+        </p:dialog>
+            </div>
     </h:body>
 </html>
 
