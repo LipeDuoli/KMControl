@@ -1,7 +1,8 @@
 package com.kmcontrol.dao;
 
 import com.kmcontrol.entities.Atendimento;
-import com.kmcontrol.persistence.HibernateUtil;
+import com.kmcontrol.entities.Usuario;
+import com.kmcontrol.util.HibernateUtil;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -66,17 +67,20 @@ public class AtendimentoDao implements IDao {
             return query.list();
         } catch (HibernateException he) {
             return null;
+        } catch (Exception e) {
+            return null;
         } finally {
             session.close();
         }
     }
 
-    public List<Object> listarAtendimento(Long id) {
+    public List<Object> listarAtendimento(Usuario usuario) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            Criteria c = session.createCriteria(Atendimento.class).add(Restrictions.eq("usuario_id", id));
-            return c.list();
+            Query query = session.createQuery("FROM Atendimento a WHERE a.usuario = :f ");
+            query.setParameter("f", usuario);
+            return query.list();
         } catch (HibernateException he) {
             return null;
         } finally {

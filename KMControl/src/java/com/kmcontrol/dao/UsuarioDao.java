@@ -1,7 +1,7 @@
 package com.kmcontrol.dao;
 
 import com.kmcontrol.entities.Usuario;
-import com.kmcontrol.persistence.HibernateUtil;
+import com.kmcontrol.util.HibernateUtil;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;

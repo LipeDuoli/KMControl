@@ -1,6 +1,6 @@
 package com.kmcontrol.dao;
 
-import com.kmcontrol.persistence.HibernateUtil;
+import com.kmcontrol.util.HibernateUtil;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;

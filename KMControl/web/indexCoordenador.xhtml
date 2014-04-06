@@ -22,11 +22,11 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><p:outputLabel value="#{usuarioController.usuario.nome}"/> <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><p:outputLabel value="#{loginMB.usuario.nome}"/> <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <h:form>
                                     <li><a><p:commandLink value="Alterar Dados" /></a></li>
-                                    <li><a><p:commandLink value="Logout" /></a></li>
+                                    <li><a><p:commandLink value="Logout" action="#{loginMB.logout()}"/></a></li>
                                 </h:form>
                             </ul>
                         </li>
@@ -41,46 +41,50 @@
                     <p:tab title="Lista de Chamados">
                         <h:form>
                             <div class="row">
-                                <p:panelGrid>
-                                    <p:row>
-                                        <p:column>Técnico: </p:column>
-                                        <p:column>
-                                            <p:selectOneMenu>
-                                                <f:selectItems value="#{usuarioController.listaTecnicos}" var="tecnicos" itemLabel="#{tecnicos.nome}"/> 
-                                            </p:selectOneMenu>
-                                        </p:column>
-                                        <p:column>Data Inicial: </p:column>
-                                        <p:column><p:calendar value="#{atendimentoController.atendimento.data}" locale="pt"/></p:column>
-                                        <p:column>Data Final: </p:column>
-                                        <p:column><p:calendar value="#{atendimentoController.atendimento.data}" locale="pt"/></p:column>
-                                    </p:row>
-                                </p:panelGrid>
+                                <center>
+                                    <p:panelGrid>
+                                        <p:row>
+                                            <p:column>Técnico: </p:column>
+                                            <p:column>
+                                                <p:selectOneMenu>
+                                                    <f:selectItems value="#{usuarioController.listaTecnicos}" var="tecnicos" itemLabel="#{tecnicos.nome}"/> 
+                                                </p:selectOneMenu>
+                                            </p:column>
+                                            <p:column>Data Inicial: </p:column>
+                                            <p:column><p:calendar value="#{atendimentoController.atendimento.data}" locale="pt"/></p:column>
+                                            <p:column>Data Final: </p:column>
+                                            <p:column><p:calendar value="#{atendimentoController.atendimento.data}" locale="pt"/></p:column>
+                                        </p:row>
+                                    </p:panelGrid>
+                                </center>
                             </div>
                             <div class="row">
                                 <p:dataTable value="" var="reg">
                                     <p:column headerText="Data">
-                                        <h:outputText value="12/12/12"/>
+                                        <h:outputText value="#{reg.data}" >
+                                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                                        </h:outputText>
                                     </p:column>
                                     <p:column headerText="Chamado">
-                                        <h:outputText value="00000000" />
+                                        <h:outputText value="#{reg.chamado}" />
                                     </p:column>
                                     <p:column headerText="Origem">
-                                        <h:outputText value="ac aaa"/>
+                                        <h:outputText value="#{reg.origem}"/>
                                     </p:column>
                                     <p:column headerText="Destino">
-                                        <h:outputText value="ac bbb"/>
+                                        <h:outputText value="#{reg.destino}"/>
                                     </p:column>
                                     <p:column headerText="KM Inicial">
-                                        <h:outputText value="1231323"/>
+                                        <h:outputText value="#{reg.kminicial}"/>
                                     </p:column>
                                     <p:column headerText="KM Final">
-                                        <h:outputText value="554255"/>
+                                        <h:outputText value="#{reg.kmfinal}"/>
                                     </p:column>
                                     <p:column headerText="KM Rodado">
-                                        <h:outputText value="656565"/>
+                                        <h:outputText value="#{atendimentoController.getKmFinal(reg.kminicial, reg.kmfinal)}"/>
                                     </p:column>
                                     <p:column>
-                                        <center><p:commandButton icon="ui-icon-newwin" /></center>
+                                        <center><p:commandButton icon="ui-icon-circle-zoomout" label="Detalhes" /></center>
                                     </p:column>
                                 </p:dataTable>
                             </div>
@@ -149,7 +153,7 @@
                                         <p:column colspan="2"><p:commandButton value="Cadastrar" action="#{usuarioController.inserirUsuario()}" ajax="false"/></p:column>
                                     </p:row>
                                     <p:row>
-                                        <p:column colspan="2"><p:messages id="messages" autoUpdate="true" closable="true"/></p:column>
+                                        <p:column colspan="2"><p:messages id="messages" autoUpdate="true" closable="true" showDetail="false"/></p:column>
                                     </p:row>
                                 </p:panelGrid>
                             </div>

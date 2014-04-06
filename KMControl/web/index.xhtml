@@ -53,13 +53,13 @@
                                 <p:panelGrid columns="2">  
 
                                     <h:outputLabel for="login" value="Login: " />  
-                                    <p:inputText id="login" label="login" value="#{usuarioController.usuario.login}"/>  
+                                    <p:inputText id="login" label="login" value="#{loginMB.usuario.login}"/>  
 
                                     <h:outputLabel for="senha" value="Senha: " />  
-                                    <p:password id="senha" label="senha" value="#{usuarioController.usuario.senha}"/>  
+                                    <p:password id="senha" label="senha" value="#{loginMB.usuario.senha}"/>  
 
                                 </p:panelGrid> 
-                                <p:commandButton value="Login" action="#{usuarioController.autenticar()}" ajax="false" style="margin-top: 5px;"/>  
+                                <p:commandButton value="Login" action="#{loginMB.autenticar()}" ajax="false" style="margin-top: 5px;"/>  
                                 <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
                             </p:panel>
                         </h:form>    
