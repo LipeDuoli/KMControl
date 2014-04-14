@@ -1,9 +1,9 @@
-body {
-    padding-top: 70px;
-}
 .ui-widget-content {
     border-style: none;
 }
 .ui-panelgrid td {
     border-style: none;
+}
+.navbar-static-top {
+    margin-bottom: 19px;
 }

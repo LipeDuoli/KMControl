@@ -55,5 +55,11 @@ public class LoginMB implements Serializable {
         session.invalidate();
         return "index";
     }
-    
+
+    public void alteraDados() {
+        dao = new UsuarioDao();
+        String pass = Hashing.sha1().hashString(usuario.getSenha(), Charsets.UTF_8).toString();
+        usuario.setSenha(pass);
+        dao.alterar(this.usuario);
+    }
 }

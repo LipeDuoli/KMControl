@@ -7,11 +7,11 @@
         <from-view-id>index.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>login</from-outcome>
-            <to-view-id>indexTecnico.xhtml</to-view-id>
+            <to-view-id>indexTecnico.jsf</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>login</from-outcome>
-            <to-view-id>indexCoordenador.xhtml</to-view-id>
+            <to-view-id>indexCoordenador.jsf</to-view-id>
         </navigation-case>
     </navigation-rule>
 </faces-config>

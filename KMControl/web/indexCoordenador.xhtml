@@ -14,26 +14,26 @@
         <title>KMControl</title>
     </h:head>
     <h:body>
-        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <img src="img/logo2.png" style="padding-top: 8px"></img>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><h:outputText value="#{loginMB.usuario.nome}"/> <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <h:form>
-                                    <li><p:commandLink value="Alterar Dados" /></li>
+        <h:form>
+            <div class="navbar navbar-default navbar-static-top" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <img src="img/logo2.png" style="padding-top: 8px"></img>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><h:outputText value="#{loginMB.usuario.nome}"/> <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><p:commandLink value="Alterar Dados" onclick="PF('altera').show();" /></li>
                                     <li><p:commandLink value="Logout" action="#{loginMB.logout()}"/></li>
-                                </h:form>
-                            </ul>
-                        </li>
-                    </ul>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
+        </h:form>
 
         <div class="container-fluid">
             <div class="row">
@@ -162,5 +162,62 @@
                 </p:tabView>
             </div>
         </div>
+        <p:dialog modal="true" header="Alterar Dados" widgetVar="altera" id="modalAlteraDados" >
+            <h:form>
+                <div class="row">
+                    <p:panelGrid>
+                        <p:row>
+                            <p:column>Nome:* </p:column>
+                            <p:column><p:inputText required="true" value="#{loginMB.usuario.nome}" label="Nome"/></p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>Login:* </p:column>
+                            <p:column><p:inputText required="true" value="#{loginMB.usuario.login}" label="Login" disabled="true" /></p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>Senha:* </p:column>
+                            <p:column><p:password id="pwd1" value="#{loginMB.usuario.senha}" match="pwd2" label="Senha" required="true"/></p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>Confirma Senha:* </p:column>
+                            <p:column><p:password id="pwd2" value="#{loginMB.usuario.senha}" required="true" label="Confirma Senha"/></p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column colspan="5">
+                                <p:separator id="separator"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>Tipo Carro: </p:column>
+                            <p:column>
+                                <p:selectOneMenu value="#{loginMB.usuario.carroparticular}">  
+                                    <f:selectItem itemLabel="Particular" itemValue="true" />  
+                                    <f:selectItem itemLabel="Da empresa" itemValue="false" />  
+                                </p:selectOneMenu>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>CPF: </p:column>
+                            <p:column><p:inputText value="#{loginMB.usuario.cpf}" label="CPF"/></p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>Banco: </p:column>
+                            <p:column><p:inputText value="#{loginMB.usuario.nomeBanco}" label="Banco"/></p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>Conta: </p:column>
+                            <p:column><p:inputText value="#{loginMB.usuario.conta}" label="Conta"/></p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>Agencia: </p:column>
+                            <p:column><p:inputText value="#{loginMB.usuario.agencia}" label="Agencia"/></p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column colspan="2"><p:commandButton value="Salvar" action="#{loginMB.alteraDados()}" ajax="false"/></p:column>
+                        </p:row>
+                    </p:panelGrid>
+                </div>
+            </h:form>
+        </p:dialog>
     </h:body>
 </html>
