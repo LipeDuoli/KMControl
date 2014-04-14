@@ -28,11 +28,11 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><p:outputLabel value="#{loginMB.usuario.nome}"/> <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><h:outputText value="#{loginMB.usuario.nome}"/> <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <h:form>
-                                    <li><a><p:commandLink value="Alterar Dados" /></a></li>
-                                    <li><a><p:commandLink value="Logout" action="#{loginMB.logout()}"/></a></li>
+                                    <li><p:commandLink value="Alterar Dados" /></li>
+                                    <li><p:commandLink value="Logout" action="#{loginMB.logout()}"/></li>
                                 </h:form>
                             </ul>
                         </li>
@@ -51,7 +51,9 @@
                                     <p:panelGrid>
                                         <p:row>
                                             <p:column>Data Inicial: </p:column>
-                                            <p:column><p:calendar value="#{atendimentoController.dataInicial}" locale="pt" pattern="dd/MM/yyyy" /></p:column>
+                                            <p:column><p:calendar value="#{atendimentoController.dataInicial}" locale="pt" pattern="dd/MM/yyyy">
+                                                    <p:ajax update="atendimentos" />
+                                                </p:calendar></p:column>
                                             <p:column>Data Final: </p:column>
                                             <p:column><p:calendar value="#{atendimentoController.dataFinal}" locale="pt" pattern="dd/MM/yyyy" /></p:column>
                                         </p:row>
@@ -59,7 +61,7 @@
                                 </center>
                             </div>
                             <div class="row">
-                                <p:dataTable value="#{atendimentoController.atendimentosTecnico}" var="reg">
+                                <p:dataTable id="atendimentos" value="#{atendimentoController.atendimentosTecnico}" var="reg">
                                     <p:column headerText="Data">
                                         <h:outputText value="#{reg.data}" >
                                             <f:convertDateTime pattern="dd/MM/yyyy" />

@@ -43,6 +43,7 @@ public class UsuarioController {
             usuario.setSenha(pass);
             dao.salvar(usuario);
             this.usuario = new Usuario();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario Cadastrado com sucesso", "Usuario Cadastrado com sucesso"));
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", "Usuario informado já existe"));
 

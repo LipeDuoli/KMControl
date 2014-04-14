@@ -3,6 +3,7 @@ package com.kmcontrol.dao;
 import com.kmcontrol.entities.Atendimento;
 import com.kmcontrol.entities.Usuario;
 import com.kmcontrol.util.HibernateUtil;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -74,12 +75,14 @@ public class AtendimentoDao implements IDao {
         }
     }
 
-    public List<Object> listarAtendimento(Usuario usuario) {
+    public List<Object> listarAtendimento(Usuario usuario, Date dataInicial, Date dataFinal) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            Query query = session.createQuery("FROM Atendimento a WHERE a.usuario = :f ");
+            Query query = session.createQuery("FROM Atendimento a WHERE a.usuario = :f AND a.data BETWEEN :datainicial AND :datafinal");
             query.setParameter("f", usuario);
+            query.setParameter("datainicial", dataInicial);
+            query.setParameter("datafinal", dataFinal);
             return query.list();
         } catch (HibernateException he) {
             return null;
