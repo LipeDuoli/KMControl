@@ -67,6 +67,10 @@ public class AtendimentoController {
         atendimentoDao = new AtendimentoDao();
         usuarioDao = new UsuarioDao();
         Usuario usuario = new UsuarioDao().buscaLogin(Util.getLogin());
-        return atendimentoDao.listarAtendimento(usuario, dataInicial, dataFinal);
+        return atendimentoDao.listarAtendimento(usuario);
+    }
+    
+    public void preparaAlterarChamado(Atendimento atendimento){
+        this.atendimento = atendimento;
     }
 }
