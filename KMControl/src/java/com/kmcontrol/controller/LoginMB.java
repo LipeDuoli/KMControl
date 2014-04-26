@@ -40,9 +40,9 @@ public class LoginMB implements Serializable {
                 HttpSession session = Util.getSession();
                 session.setAttribute("login", u.getLogin());
                 if (u.isCoordenador()) {
-                    return "indexCoordenador";
+                    return "indexCoordenador?faces-redirect=true";
                 } else {
-                    return "indexTecnico";
+                    return "indexTecnico?faces-redirect=true";
                 }
             }
         }
