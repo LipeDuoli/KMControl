@@ -4,7 +4,7 @@ import com.google.common.base.Charsets;
 import com.google.common.hash.Hashing;
 import com.kmcontrol.dao.UsuarioDao;
 import com.kmcontrol.entities.Usuario;
-import com.kmcontrol.util.Util;
+import com.kmcontrol.util.SessionUtil;
 import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -37,7 +37,7 @@ public class LoginMB implements Serializable {
             String pass = Hashing.sha1().hashString(usuario.getSenha(), Charsets.UTF_8).toString();
             if (pass.equals(u.getSenha())) {
                 this.usuario = u;
-                HttpSession session = Util.getSession();
+                HttpSession session = SessionUtil.getSession();
                 session.setAttribute("login", u.getLogin());
                 if (u.isCoordenador()) {
                     return "indexCoordenador?faces-redirect=true";
@@ -51,7 +51,7 @@ public class LoginMB implements Serializable {
     }
 
     public String logout() {
-        HttpSession session = Util.getSession();
+        HttpSession session = SessionUtil.getSession();
         session.invalidate();
         return "index";
     }

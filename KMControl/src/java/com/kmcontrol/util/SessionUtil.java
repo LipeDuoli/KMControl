@@ -4,7 +4,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-public class Util {
+public class SessionUtil {
 
     public static HttpSession getSession() {
         return (HttpSession) FacesContext.

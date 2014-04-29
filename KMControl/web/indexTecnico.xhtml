@@ -39,58 +39,60 @@
             <div class="row">
                 <p:tabView id="tabs">
                     <p:tab title="Meus Chamados" id="tabMeusChamados">
-                        <h:form>
-                            <div class="row">
-                                <center>
-                                    <p:panelGrid>
-                                        <p:row>
-                                            <p:column>Data Inicial: </p:column>
-                                            <p:column><p:calendar value="#{atendimentoController.dataInicial}" locale="pt" pattern="dd/MM/yyyy">
-                                                    <p:ajax update="atendimentos" />
-                                                </p:calendar></p:column>
-                                            <p:column>Data Final: </p:column>
-                                            <p:column><p:calendar value="#{atendimentoController.dataFinal}" locale="pt" pattern="dd/MM/yyyy" /></p:column>
-                                        </p:row>
-                                    </p:panelGrid>
-                                </center>
-                            </div>
-                            <div class="row">
-                                <p:dataTable id="atendimentos" value="#{atendimentoController.atendimentosTecnico}" var="reg">
-                                    <p:column headerText="Data">
-                                        <h:outputText value="#{reg.data}" >
-                                            <f:convertDateTime pattern="dd/MM/yyyy" />
-                                        </h:outputText>
-                                    </p:column>
-                                    <p:column headerText="Chamado">
-                                        <h:outputText value="#{reg.chamado}" />
-                                    </p:column>
-                                    <p:column headerText="Origem">
-                                        <h:outputText value="#{reg.origem}"/>
-                                    </p:column>
-                                    <p:column headerText="Destino">
-                                        <h:outputText value="#{reg.destino}"/>
-                                    </p:column>
-                                    <p:column headerText="KM Inicial">
-                                        <h:outputText value="#{reg.kminicial}"/>
-                                    </p:column>
-                                    <p:column headerText="KM Final">
-                                        <h:outputText value="#{reg.kmfinal}"/>
-                                    </p:column>
-                                    <p:column headerText="KM Rodado">
-                                        <h:outputText value="#{atendimentoController.getKmFinal(reg.kminicial, reg.kmfinal)}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <center>
-                                            <p:commandButton icon="ui-icon-circle-zoomout" label="Detalhes" 
-                                               action="#{atendimentoController.preparaAlterarChamado(reg)}" 
-                                               onsuccess="alteraChamado.show();"
-                                               update=":panelGroupAlteraChamado"
-                                               ajax="true" />
-                                        </center>
-                                    </p:column>
-                                </p:dataTable>
-                            </div>
-                        </h:form>
+                        <h:panelGroup id="listaChamados">
+                            <h:form id="formChamados">
+                                <div class="row">
+                                    <center>
+                                        <p:panelGrid>
+                                            <p:row>
+                                                <p:column>Data Inicial: </p:column>
+                                                <p:column><p:calendar value="#{atendimentoController.dataInicial}" locale="pt" pattern="dd/MM/yyyy">
+                                                        <p:ajax update="atendimentos" />
+                                                    </p:calendar></p:column>
+                                                <p:column>Data Final: </p:column>
+                                                <p:column><p:calendar value="#{atendimentoController.dataFinal}" locale="pt" pattern="dd/MM/yyyy" /></p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+                                    </center>
+                                </div>
+                                <div class="row">
+                                    <p:dataTable id="atendimentos" value="#{atendimentoController.atendimentosTecnico}" var="reg">
+                                        <p:column headerText="Data">
+                                            <h:outputText value="#{reg.data}" >
+                                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column headerText="Chamado">
+                                            <h:outputText value="#{reg.chamado}" />
+                                        </p:column>
+                                        <p:column headerText="Origem">
+                                            <h:outputText value="#{reg.origem}"/>
+                                        </p:column>
+                                        <p:column headerText="Destino">
+                                            <h:outputText value="#{reg.destino}"/>
+                                        </p:column>
+                                        <p:column headerText="KM Inicial">
+                                            <h:outputText value="#{reg.kminicial}"/>
+                                        </p:column>
+                                        <p:column headerText="KM Final">
+                                            <h:outputText value="#{reg.kmfinal}"/>
+                                        </p:column>
+                                        <p:column headerText="KM Rodado">
+                                            <h:outputText value="#{atendimentoController.getKmFinal(reg.kminicial, reg.kmfinal)}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <center>
+                                                <p:commandButton icon="ui-icon-circle-zoomout" label="Detalhes" 
+                                                                 action="#{atendimentoController.preparaAlterarChamado(reg)}" 
+                                                                 onsuccess="alteraChamado.show();"
+                                                                 update=":panelGroupAlteraChamado"
+                                                                 ajax="true" />
+                                            </center>
+                                        </p:column>
+                                    </p:dataTable>
+                                </div>
+                            </h:form>
+                        </h:panelGroup>
                     </p:tab>
                     <p:tab title="Cadastro de Chamados" id="tabCadastroDeChamados">
                         <h:form>
@@ -232,10 +234,10 @@
                             <p:row>
                                 <p:column colspan="2">
                                     <p:commandButton value="Salvar" 
-                                         action="#{loginMB.alteraDados()}"
-                                         ajax="true"
-                                         update=":panelAlteraDadosUsuario,:formCabecalho:nomeUsuario"
-                                         oncomplete="if (args &amp;&amp; !args.validationFailed) alteraUsuario.hide();" />
+                                                     action="#{loginMB.alteraDados()}"
+                                                     ajax="true"
+                                                     update=":panelAlteraDadosUsuario,:formCabecalho:nomeUsuario"
+                                                     oncomplete="if (args &amp;&amp; !args.validationFailed) alteraUsuario.hide();" />
                                 </p:column>
                             </p:row>
                         </p:panelGrid>
@@ -318,7 +320,12 @@
                                 </p:column>
                             </p:row>
                             <p:row>
-                                <p:column colspan="3"><p:commandButton value="Cadastrar Chamado" action="#{atendimentoController.cadastrarChamado()}" ajax="false"/></p:column>
+                                <p:column colspan="3">
+                                    <p:commandButton value="Alterar Dados" 
+                                                     action="#{atendimentoController.alterarChamado()}" 
+                                                     ajax="false" 
+                                                     />
+                                </p:column>
                             </p:row>
                         </p:panelGrid>
                     </div>

@@ -4,7 +4,7 @@ import com.kmcontrol.dao.AtendimentoDao;
 import com.kmcontrol.dao.UsuarioDao;
 import com.kmcontrol.entities.Atendimento;
 import com.kmcontrol.entities.Usuario;
-import com.kmcontrol.util.Util;
+import com.kmcontrol.util.SessionUtil;
 import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -50,7 +50,7 @@ public class AtendimentoController {
         usuarioDao = new UsuarioDao();
         atendimentoDao = new AtendimentoDao();
         try {
-            atendimento.setUsuario(usuarioDao.buscaLogin(Util.getLogin()));
+            atendimento.setUsuario(usuarioDao.buscaLogin(SessionUtil.getLogin()));
             atendimentoDao.salvar(atendimento);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Chamado registrado com exito.", "Chamado registrado com exito."));
             atendimento = new Atendimento();
@@ -58,19 +58,29 @@ public class AtendimentoController {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Não foi possivel salvar o chamado", "Não foi possivel salvar o chamado"));
         }
     }
-    
-    public Integer getKmFinal(Integer kmInicial, Integer kmFinal){
+
+    public void alterarChamado() {
+        atendimentoDao = new AtendimentoDao();
+        try {
+            atendimentoDao.alterar(this.atendimento);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Chamado alterado com exito.", "Chamado alterado com exito."));
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Não foi possivel salvar o chamado", "Não foi possivel salvar o chamado"));
+        }
+    }
+
+    public Integer getKmFinal(Integer kmInicial, Integer kmFinal) {
         return kmFinal - kmInicial;
     }
 
     public List getAtendimentosTecnico() {
         atendimentoDao = new AtendimentoDao();
         usuarioDao = new UsuarioDao();
-        Usuario usuario = new UsuarioDao().buscaLogin(Util.getLogin());
+        Usuario usuario = new UsuarioDao().buscaLogin(SessionUtil.getLogin());
         return atendimentoDao.listarAtendimento(usuario);
     }
-    
-    public void preparaAlterarChamado(Atendimento atendimento){
+
+    public void preparaAlterarChamado(Atendimento atendimento) {
         this.atendimento = atendimento;
     }
 }
