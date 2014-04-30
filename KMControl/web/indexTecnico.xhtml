@@ -46,11 +46,27 @@
                                         <p:panelGrid>
                                             <p:row>
                                                 <p:column>Data Inicial: </p:column>
-                                                <p:column><p:calendar value="#{atendimentoController.dataInicial}" locale="pt" pattern="dd/MM/yyyy">
-                                                        <p:ajax update="atendimentos" />
-                                                    </p:calendar></p:column>
+                                                <p:column>
+                                                    <p:calendar id="startDate" 
+                                                                value="#{atendimentoController.dataInicial}"
+                                                                locale="pt" 
+                                                                pattern="dd/MM/yyyy" 
+                                                                label="#{ui['calendar.start']}" >
+                                                        <p:ajax event="dateSelect" update="tabs:formChamados:endDate" />
+                                                    </p:calendar>
+                                                </p:column>
                                                 <p:column>Data Final: </p:column>
-                                                <p:column><p:calendar value="#{atendimentoController.dataFinal}" locale="pt" pattern="dd/MM/yyyy" /></p:column>
+                                                <p:column>
+                                                    <p:calendar id="endDate" 
+                                                                value="#{atendimentoController.dataFinal}" 
+                                                                locale="pt" 
+                                                                pattern="dd/MM/yyyy" 
+                                                                mindate="#{atendimentoController.dataInicial}"
+                                                                label="#{ui['calendar.end']}" >
+                                                        <f:attribute name="startDate" value="#{atendimentoController.dataInicial}" />
+                                                        <f:validator validatorId="primeDateRangeValidator" />
+                                                    </p:calendar>
+                                                </p:column>
                                             </p:row>
                                         </p:panelGrid>
                                     </center>
