@@ -9,9 +9,11 @@ import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 @ManagedBean
+@ViewScoped
 public class AtendimentoController {
 
     private Atendimento atendimento;
@@ -80,7 +82,7 @@ public class AtendimentoController {
         return atendimentoDao.listarAtendimento(usuario);
     }
 
-    public void preparaAlterarChamado(Atendimento atendimento) {
+    public void preparaAlterarChamado(Atendimento atendimento) {        
         this.atendimento = atendimento;
     }
 }
