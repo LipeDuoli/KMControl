@@ -10,6 +10,8 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Expression;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 public class AtendimentoDao implements IDao {
@@ -75,13 +77,20 @@ public class AtendimentoDao implements IDao {
         }
     }
 
-    public List<Object> listarAtendimento(Usuario usuario) {
+    public List<Object> listarAtendimento(Usuario usuario, Date dataInicial, Date dataFinal) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            Query query = session.createQuery("FROM Atendimento a WHERE a.usuario = :f");
-            query.setParameter("f", usuario);
-            return query.list();
+            Criteria criteria = session.createCriteria(Atendimento.class);
+            criteria.add(Restrictions.eq("usuario", usuario));
+            if (dataInicial != null) {
+                criteria.add(Expression.ge("data", dataInicial));
+            }
+            if (dataFinal != null) {
+                criteria.add(Expression.le("data", dataFinal));
+            }
+            criteria.addOrder(Order.asc("data"));
+            return criteria.list();
         } catch (HibernateException he) {
             return null;
         } finally {

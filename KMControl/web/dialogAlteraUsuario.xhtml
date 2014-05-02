@@ -1,0 +1,74 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:ui="http://java.sun.com/jsf/facelets"
+             xmlns:h="http://java.sun.com/jsf/html"
+             xmlns:f="http://java.sun.com/jsf/core"
+             xmlns:p="http://primefaces.org/ui" >
+
+    <p:dialog modal="true" header="Alterar Dados" widgetVar="alteraUsuario" id="modalAlteraDadosUsuario" >
+            <h:panelGroup id="panelAlteraDadosUsuario">
+                <h:messages />
+                <h:form>
+                    <div class="row">
+                        <p:panelGrid>
+                            <p:row>
+                                <p:column>Nome:* </p:column>
+                                <p:column><p:inputText required="true" value="#{loginMB.usuario.nome}" label="Nome"/></p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>Login:* </p:column>
+                                <p:column><p:inputText required="true" value="#{loginMB.usuario.login}" label="Login" disabled="true" /></p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>Senha:* </p:column>
+                                <p:column><p:password id="pwd1" value="#{loginMB.usuario.senha}" match="pwd2" label="Senha" required="true"/></p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>Confirma Senha:* </p:column>
+                                <p:column><p:password id="pwd2" value="#{loginMB.usuario.senha}" required="true" label="Confirma Senha"/></p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column colspan="5">
+                                    <p:separator id="separator"/>
+                                </p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>Tipo Carro: </p:column>
+                                <p:column>
+                                    <p:selectOneMenu value="#{loginMB.usuario.carroparticular}">  
+                                        <f:selectItem itemLabel="Particular" itemValue="true" />  
+                                        <f:selectItem itemLabel="Da empresa" itemValue="false" />  
+                                    </p:selectOneMenu>
+                                </p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>CPF: </p:column>
+                                <p:column><p:inputText value="#{loginMB.usuario.cpf}" label="CPF"/></p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>Banco: </p:column>
+                                <p:column><p:inputText value="#{loginMB.usuario.nomeBanco}" label="Banco"/></p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>Conta: </p:column>
+                                <p:column><p:inputText value="#{loginMB.usuario.conta}" label="Conta"/></p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>Agencia: </p:column>
+                                <p:column><p:inputText value="#{loginMB.usuario.agencia}" label="Agencia"/></p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column colspan="2">
+                                    <p:commandButton value="Salvar" 
+                                                     action="#{loginMB.alteraDados()}"
+                                                     ajax="true"
+                                                     update=":panelAlteraDadosUsuario,:formCabecalho:nomeUsuario"
+                                                     oncomplete="if (args &amp;&amp; !args.validationFailed) alteraUsuario.hide();" />
+                                </p:column>
+                            </p:row>
+                        </p:panelGrid>
+                    </div>
+                </h:form>
+            </h:panelGroup>
+        </p:dialog>
+
+</ui:fragment>

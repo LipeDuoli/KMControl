@@ -12,9 +12,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-@ManagedBean
+@ManagedBean(name = "AtendimentoTecnico")
 @ViewScoped
-public class AtendimentoController {
+public class AtendimentoTecnico {
 
     private Atendimento atendimento;
     private AtendimentoDao atendimentoDao;
@@ -54,10 +54,10 @@ public class AtendimentoController {
         try {
             atendimento.setUsuario(usuarioDao.buscaLogin(SessionUtil.getLogin()));
             atendimentoDao.salvar(atendimento);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Chamado registrado com exito.", "Chamado registrado com exito."));
+            FacesContext.getCurrentInstance().addMessage("messages", new FacesMessage(FacesMessage.SEVERITY_INFO, "Chamado registrado com exito.", "Chamado registrado com exito."));
             atendimento = new Atendimento();
         } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Não foi possivel salvar o chamado", "Não foi possivel salvar o chamado"));
+            FacesContext.getCurrentInstance().addMessage("messages", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Não foi possivel salvar o chamado", "Não foi possivel salvar o chamado"));
         }
     }
 
@@ -66,6 +66,7 @@ public class AtendimentoController {
         try {
             atendimentoDao.alterar(this.atendimento);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Chamado alterado com exito.", "Chamado alterado com exito."));
+            atendimento = new Atendimento();
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Não foi possivel salvar o chamado", "Não foi possivel salvar o chamado"));
         }
@@ -79,10 +80,20 @@ public class AtendimentoController {
         atendimentoDao = new AtendimentoDao();
         usuarioDao = new UsuarioDao();
         Usuario usuario = new UsuarioDao().buscaLogin(SessionUtil.getLogin());
-        return atendimentoDao.listarAtendimento(usuario);
+        return atendimentoDao.listarAtendimento(usuario, dataInicial, dataFinal);
     }
 
-    public void preparaAlterarChamado(Atendimento atendimento) {        
+    public void deletarAtendimento(Atendimento u) {
+        atendimentoDao = new AtendimentoDao();
+        try {
+            atendimentoDao.excluir(u);
+            FacesContext.getCurrentInstance().addMessage("messageLista", new FacesMessage(FacesMessage.SEVERITY_INFO, "Chamado excluido com exito.", "Chamado excluido com exito."));
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage("messageLista", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Chamado excluido com exito.", "Chamado excluido com exito."));
+        }
+    }
+
+    public void preparaAlterarChamado(Atendimento atendimento) {
         this.atendimento = atendimento;
     }
 }

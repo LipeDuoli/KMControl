@@ -12,7 +12,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
-@ManagedBean
+@ManagedBean(name = "loginMB")
 @SessionScoped
 public class LoginMB implements Serializable {
 

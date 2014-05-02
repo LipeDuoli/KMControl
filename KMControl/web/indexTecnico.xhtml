@@ -14,27 +14,9 @@
         <title>KMControl</title>
     </h:head>
     <h:body>
-        <h:form id="formCabecalho">
-            <div class="navbar navbar-default navbar-static-top" role="navigation">
-                <div class="container">
-                    <div class="navbar-header">
-                        <img src="img/logo2.png" style="padding-top: 8px"></img>
-                    </div>
-                    <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><h:outputText id="nomeUsuario" value="#{loginMB.usuario.nome}"/> <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><p:commandLink value="Alterar Dados" onclick="PF('alteraUsuario').show();" /></li>
-                                    <li><p:commandLink value="Logout" action="#{loginMB.logout()}"/></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </h:form>
-
+        
+        <ui:include src="header.xhtml" />
+        
         <div class="container-fluid">
             <div class="row">
                 <p:tabView id="tabs">
@@ -48,31 +30,33 @@
                                                 <p:column>Data Inicial: </p:column>
                                                 <p:column>
                                                     <p:calendar id="startDate" 
-                                                                value="#{atendimentoController.dataInicial}"
+                                                                value="#{AtendimentoTecnico.dataInicial}"
                                                                 locale="pt" 
                                                                 pattern="dd/MM/yyyy" 
                                                                 label="#{ui['calendar.start']}" >
-                                                        <p:ajax event="dateSelect" update="endDate" />
                                                     </p:calendar>
                                                 </p:column>
                                                 <p:column>Data Final: </p:column>
                                                 <p:column>
                                                     <p:calendar id="endDate" 
-                                                                value="#{atendimentoController.dataFinal}" 
+                                                                value="#{AtendimentoTecnico.dataFinal}" 
                                                                 locale="pt" 
                                                                 pattern="dd/MM/yyyy" 
-                                                                mindate="#{atendimentoController.dataInicial}"
+                                                                mindate="#{AtendimentoTecnico.dataInicial}"
                                                                 label="#{ui['calendar.end']}" >
-                                                        <f:attribute name="startDate" value="#{atendimentoController.dataInicial}" />
+                                                        <f:attribute name="startDate" value="#{AtendimentoTecnico.dataInicial}" />
                                                         <f:validator validatorId="primeDateRangeValidator" />
                                                     </p:calendar>
+                                                </p:column>
+                                                <p:column>
+                                                    <p:commandButton value="OK" ajax="false"/>
                                                 </p:column>
                                             </p:row>
                                         </p:panelGrid>
                                     </center>
                                 </div>
                                 <div class="row">
-                                    <p:dataTable id="atendimentos" value="#{atendimentoController.atendimentosTecnico}" var="reg">
+                                    <p:dataTable id="atendimentos" value="#{AtendimentoTecnico.atendimentosTecnico}" var="reg">
                                         <p:column headerText="Data">
                                             <h:outputText value="#{reg.data}" >
                                                 <f:convertDateTime pattern="dd/MM/yyyy" />
@@ -94,21 +78,27 @@
                                             <h:outputText value="#{reg.kmfinal}"/>
                                         </p:column>
                                         <p:column headerText="KM Rodado">
-                                            <h:outputText value="#{atendimentoController.getKmFinal(reg.kminicial, reg.kmfinal)}"/>
+                                            <h:outputText value="#{AtendimentoTecnico.getKmFinal(reg.kminicial, reg.kmfinal)}"/>
                                         </p:column>
-                                        <p:column>
+                                        <p:column headerText="Ações" width="120">
                                             <center>
-                                                <p:commandButton icon="ui-icon-circle-zoomout" label="Detalhes" 
-                                                                 action="#{atendimentoController.preparaAlterarChamado(reg)}" 
+                                                <p:commandButton icon="ui-icon-circle-zoomout" 
+                                                                 label="Detalhes" 
+                                                                 action="#{AtendimentoTecnico.preparaAlterarChamado(reg)}" 
                                                                  onsuccess="alteraChamado.show();"
                                                                  update=":panelGroupAlteraChamado"
                                                                  ajax="true" />
+                                                <p:commandButton icon="ui-icon-circle-close" 
+                                                                 label="Excluir"
+                                                                 action="#{AtendimentoTecnico.deletarAtendimento(reg)}"
+                                                                 ajax="false" />
                                             </center>
                                         </p:column>
                                     </p:dataTable>
                                 </div>
                             </h:form>
                         </h:panelGroup>
+                        <p:messages id="messageLista" autoUpdate="true" closable="true" showDetail="false" />
                     </p:tab>
                     <p:tab title="Cadastro de Chamados" id="tabCadastroDeChamados">
                         <h:form>
@@ -116,25 +106,25 @@
                                 <p:panelGrid>
                                     <p:row>
                                         <p:column>Data:* </p:column>
-                                        <p:column><p:calendar value="#{atendimentoController.atendimento.data}" required="true" label="Data" id="data" locale="pt" pattern="dd/MM/yyyy" /> </p:column>
+                                        <p:column><p:calendar value="#{AtendimentoTecnico.atendimento.data}" required="true" label="Data" id="data" locale="pt" pattern="dd/MM/yyyy" /> </p:column>
                                         <p:column>Chamado:* </p:column>
-                                        <p:column><p:inputText value="#{atendimentoController.atendimento.chamado}" required="true" label="Chamado" id="chamado"/></p:column>
+                                        <p:column><p:inputText value="#{AtendimentoTecnico.atendimento.chamado}" required="true" label="Chamado" id="chamado"/></p:column>
                                         <p:column>OBS Atendimento: </p:column>
                                     </p:row>
                                     <p:row>
                                         <p:column>Origem:* </p:column>
-                                        <p:column colspan="3"><p:inputText value="#{atendimentoController.atendimento.origem}" size="62" required="true" label="Origem" id="origem"/></p:column>
-                                        <p:column rowspan="3"><p:inputTextarea rows="5" cols="40" maxlength="255" autoResize="false" value="#{atendimentoController.atendimento.obsAtendimento}"/></p:column>
+                                        <p:column colspan="3"><p:inputText value="#{AtendimentoTecnico.atendimento.origem}" size="62" required="true" label="Origem" id="origem"/></p:column>
+                                        <p:column rowspan="3"><p:inputTextarea rows="5" cols="40" maxlength="255" autoResize="false" value="#{AtendimentoTecnico.atendimento.obsAtendimento}"/></p:column>
                                     </p:row>
                                     <p:row>
                                         <p:column>Destino:* </p:column>
-                                        <p:column colspan="3"><p:inputText value="#{atendimentoController.atendimento.destino}" size="62" required="true" label="Destino" id="destino"/></p:column>
+                                        <p:column colspan="3"><p:inputText value="#{AtendimentoTecnico.atendimento.destino}" size="62" required="true" label="Destino" id="destino"/></p:column>
                                     </p:row>
                                     <p:row>
                                         <p:column>KM Inicial:* </p:column>
-                                        <p:column><p:inputText value="#{atendimentoController.atendimento.kminicial}" required="true" label="KM Inicial" id="kminicial"/></p:column>
+                                        <p:column><p:inputText value="#{AtendimentoTecnico.atendimento.kminicial}" required="true" label="KM Inicial" id="kminicial"/></p:column>
                                         <p:column>KM Final:* </p:column>
-                                        <p:column><p:inputText value="#{atendimentoController.atendimento.kmfinal}" required="true" label="KM Final" id="kmfinal"/></p:column>
+                                        <p:column><p:inputText value="#{AtendimentoTecnico.atendimento.kmfinal}" required="true" label="KM Final" id="kmfinal"/></p:column>
                                     </p:row>
                                     <p:row>
                                         <p:column colspan="5">
@@ -146,15 +136,15 @@
                                         <p:column>Estacionamento</p:column>
                                     </p:row>
                                     <p:row>
-                                        <p:column><p:spinner value="#{atendimentoController.atendimento.qtdHospedagem}" min="0" size="1"/></p:column>
+                                        <p:column><p:spinner value="#{AtendimentoTecnico.atendimento.qtdHospedagem}" min="0" size="1"/></p:column>
                                         <p:column colspan="2">
-                                            <p:inputText value="#{atendimentoController.atendimento.valorHospedagem}" label="ValorHospedagem" id="ValorHospedagem" />
+                                            <p:inputText value="#{AtendimentoTecnico.atendimento.valorHospedagem}" label="ValorHospedagem" id="ValorHospedagem" />
                                             <p:watermark for="ValorHospedagem" value="Valor"/>
                                         </p:column>
                                         <p:column colspan="2">
-                                            <p:spinner value="#{atendimentoController.atendimento.qtdEstacionamento}" min="0" size="1" />
+                                            <p:spinner value="#{AtendimentoTecnico.atendimento.qtdEstacionamento}" min="0" size="1" />
                                             <p:spacer style="padding-right: 20px"/>
-                                            <p:inputText value="#{atendimentoController.atendimento.valorEstacionamento}" label="ValorEstacionamento" id="ValorEstacionamento" />
+                                            <p:inputText value="#{AtendimentoTecnico.atendimento.valorEstacionamento}" label="ValorEstacionamento" id="ValorEstacionamento" />
                                             <p:watermark for="ValorEstacionamento" value="Valor"/>
                                         </p:column>
                                     </p:row>
@@ -163,15 +153,15 @@
                                         <p:column>Alimentação</p:column>
                                     </p:row>
                                     <p:row>
-                                        <p:column><p:spinner value="#{atendimentoController.atendimento.qtdPedagio}" min="0" size="1"/></p:column>
+                                        <p:column><p:spinner value="#{AtendimentoTecnico.atendimento.qtdPedagio}" min="0" size="1"/></p:column>
                                         <p:column colspan="2">
-                                            <p:inputText value="#{atendimentoController.atendimento.valorPedagio}" label="ValorPedagio" id="ValorPedagio" />
+                                            <p:inputText value="#{AtendimentoTecnico.atendimento.valorPedagio}" label="ValorPedagio" id="ValorPedagio" />
                                             <p:watermark for="ValorPedagio" value="Valor"/>
                                         </p:column>
                                         <p:column colspan="2">
-                                            <p:spinner value="#{atendimentoController.atendimento.qtdAlimentacao}" min="0" size="1" />
+                                            <p:spinner value="#{AtendimentoTecnico.atendimento.qtdAlimentacao}" min="0" size="1" />
                                             <p:spacer style="padding-right: 20px"/>
-                                            <p:inputText value="#{atendimentoController.atendimento.valorAlimentacao}" label="ValorAlimentação" id="ValorAlimentação" />
+                                            <p:inputText value="#{AtendimentoTecnico.atendimento.valorAlimentacao}" label="ValorAlimentação" id="ValorAlimentação" />
                                             <p:watermark for="ValorAlimentação" value="Valor"/>
                                         </p:column>
                                     </p:row>
@@ -181,7 +171,7 @@
                                         </p:column>
                                     </p:row>
                                     <p:row>
-                                        <p:column colspan="3"><p:commandButton value="Cadastrar Chamado" action="#{atendimentoController.cadastrarChamado()}" ajax="false"/></p:column>
+                                        <p:column colspan="3"><p:commandButton value="Cadastrar Chamado" action="#{AtendimentoTecnico.cadastrarChamado()}" ajax="false"/></p:column>
                                     </p:row>
                                     <p:row>
                                         <p:column colspan="5"><p:messages id="messages" autoUpdate="true" closable="true" showDetail="false" /></p:column>
@@ -195,159 +185,11 @@
         </div>
 
         <!-- INICIO Modal para alterar os dados do usuario -->
-        <p:dialog modal="true" header="Alterar Dados" widgetVar="alteraUsuario" id="modalAlteraDadosUsuario" >
-            <h:panelGroup id="panelAlteraDadosUsuario">
-                <h:messages />
-                <h:form>
-                    <div class="row">
-                        <p:panelGrid>
-                            <p:row>
-                                <p:column>Nome:* </p:column>
-                                <p:column><p:inputText required="true" value="#{loginMB.usuario.nome}" label="Nome"/></p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column>Login:* </p:column>
-                                <p:column><p:inputText required="true" value="#{loginMB.usuario.login}" label="Login" disabled="true" /></p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column>Senha:* </p:column>
-                                <p:column><p:password id="pwd1" value="#{loginMB.usuario.senha}" match="pwd2" label="Senha" required="true"/></p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column>Confirma Senha:* </p:column>
-                                <p:column><p:password id="pwd2" value="#{loginMB.usuario.senha}" required="true" label="Confirma Senha"/></p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column colspan="5">
-                                    <p:separator id="separator"/>
-                                </p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column>Tipo Carro: </p:column>
-                                <p:column>
-                                    <p:selectOneMenu value="#{loginMB.usuario.carroparticular}">  
-                                        <f:selectItem itemLabel="Particular" itemValue="true" />  
-                                        <f:selectItem itemLabel="Da empresa" itemValue="false" />  
-                                    </p:selectOneMenu>
-                                </p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column>CPF: </p:column>
-                                <p:column><p:inputText value="#{loginMB.usuario.cpf}" label="CPF"/></p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column>Banco: </p:column>
-                                <p:column><p:inputText value="#{loginMB.usuario.nomeBanco}" label="Banco"/></p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column>Conta: </p:column>
-                                <p:column><p:inputText value="#{loginMB.usuario.conta}" label="Conta"/></p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column>Agencia: </p:column>
-                                <p:column><p:inputText value="#{loginMB.usuario.agencia}" label="Agencia"/></p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column colspan="2">
-                                    <p:commandButton value="Salvar" 
-                                                     action="#{loginMB.alteraDados()}"
-                                                     ajax="true"
-                                                     update=":panelAlteraDadosUsuario,:formCabecalho:nomeUsuario"
-                                                     oncomplete="if (args &amp;&amp; !args.validationFailed) alteraUsuario.hide();" />
-                                </p:column>
-                            </p:row>
-                        </p:panelGrid>
-                    </div>
-                </h:form>
-            </h:panelGroup>
-        </p:dialog>
+        <ui:include src="dialogAlteraUsuario.xhtml" />
         <!-- FIM Modal para alterar os dados do usuario -->
 
         <!-- INICIO Modal para alterar os dados do chamado -->
-        <p:dialog modal="true" header="Alterar Dados" widgetVar="alteraChamado" id="modalAlteraDadosChamado" >
-            <h:panelGroup id="panelGroupAlteraChamado">
-                <h:form id="formModalAlteraDadosChamado">
-                    <div class="row">                   
-                        <p:panelGrid>
-                            <p:row>
-                                <p:column>Data:* </p:column>
-                                <p:column><p:calendar value="#{atendimentoController.atendimento.data}" required="true" label="Data" id="data" locale="pt" pattern="dd/MM/yyyy" /> </p:column>
-                                <p:column>Chamado:* </p:column>
-                                <p:column><p:inputText value="#{atendimentoController.atendimento.chamado}" required="true" label="Chamado" id="chamado" disabled="true"/></p:column>
-                                <p:column>OBS Atendimento: </p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column>Origem:* </p:column>
-                                <p:column colspan="3"><p:inputText value="#{atendimentoController.atendimento.origem}" size="62" required="true" label="Origem" id="origem"/></p:column>
-                                <p:column rowspan="3"><p:inputTextarea rows="5" cols="40" maxlength="255" autoResize="false" value="#{atendimentoController.atendimento.obsAtendimento}"/></p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column>Destino:* </p:column>
-                                <p:column colspan="3"><p:inputText value="#{atendimentoController.atendimento.destino}" size="62" required="true" label="Destino" id="destino"/></p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column>KM Inicial:* </p:column>
-                                <p:column><p:inputText value="#{atendimentoController.atendimento.kminicial}" required="true" label="KM Inicial" id="kminicial"/></p:column>
-                                <p:column>KM Final:* </p:column>
-                                <p:column><p:inputText value="#{atendimentoController.atendimento.kmfinal}" required="true" label="KM Final" id="kmfinal"/></p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column colspan="5">
-                                    <p:separator id="separator"/>
-                                </p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column colspan="3">Hospedagem</p:column>
-                                <p:column>Estacionamento</p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column><p:spinner value="#{atendimentoController.atendimento.qtdHospedagem}" min="0" size="1"/></p:column>
-                                <p:column colspan="2">
-                                    <p:inputText value="#{atendimentoController.atendimento.valorHospedagem}" label="ValorHospedagem" id="ValorHospedagem" />
-                                    <p:watermark for="ValorHospedagem" value="Valor"/>
-                                </p:column>
-                                <p:column colspan="2">
-                                    <p:spinner value="#{atendimentoController.atendimento.qtdEstacionamento}" min="0" size="1" />
-                                    <p:spacer style="padding-right: 20px"/>
-                                    <p:inputText value="#{atendimentoController.atendimento.valorEstacionamento}" label="ValorEstacionamento" id="ValorEstacionamento" />
-                                    <p:watermark for="ValorEstacionamento" value="Valor"/>
-                                </p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column colspan="3">Pedagio</p:column>
-                                <p:column>Alimentação</p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column><p:spinner value="#{atendimentoController.atendimento.qtdPedagio}" min="0" size="1"/></p:column>
-                                <p:column colspan="2">
-                                    <p:inputText value="#{atendimentoController.atendimento.valorPedagio}" label="ValorPedagio" id="ValorPedagio" />
-                                    <p:watermark for="ValorPedagio" value="Valor"/>
-                                </p:column>
-                                <p:column colspan="2">
-                                    <p:spinner value="#{atendimentoController.atendimento.qtdAlimentacao}" min="0" size="1" />
-                                    <p:spacer style="padding-right: 20px"/>
-                                    <p:inputText value="#{atendimentoController.atendimento.valorAlimentacao}" label="ValorAlimentação" id="ValorAlimentação" />
-                                    <p:watermark for="ValorAlimentação" value="Valor"/>
-                                </p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column colspan="5">
-                                    <p:spacer />
-                                </p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column colspan="3">
-                                    <p:commandButton value="Alterar Dados" 
-                                                     action="#{atendimentoController.alterarChamado()}" 
-                                                     ajax="false" 
-                                                     />
-                                </p:column>
-                            </p:row>
-                        </p:panelGrid>
-                    </div>
-                </h:form>                
-            </h:panelGroup>
-        </p:dialog>
+        <ui:include src="dialogAlteraChamado.xhtml" />
         <!-- FIM Modal para alterar os dados do chamado -->
 
     </h:body>
