@@ -28,7 +28,8 @@
                                             <p:column>Técnico: </p:column>
                                             <p:column>
                                                 <p:selectOneMenu>
-                                                    <f:selectItems value="#{usuario.listaTecnicos}" var="tecnicos" itemLabel="#{tecnicos.nome}" /> 
+                                                    <f:selectItem itemLabel=" " itemValue="null" />
+                                                    <f:selectItems id="tecnicos" value="#{usuario.listaTecnicos}" var="tecnicos" itemLabel="#{tecnicos.nome}" itemValue="#{tecnicos.login}" /> 
                                                 </p:selectOneMenu>
                                             </p:column>
                                             <p:column>Data Inicial: </p:column>

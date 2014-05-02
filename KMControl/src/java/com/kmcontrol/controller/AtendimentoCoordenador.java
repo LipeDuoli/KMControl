@@ -20,6 +20,14 @@ public class AtendimentoCoordenador {
     private UsuarioDao usuarioDao;
     private Usuario usuario;
     private Date dataInicial, dataFinal;
+    private String LoginUsuarioSelecionado;
+
+    public Atendimento getAtendimento() {
+        if (this.atendimento == null) {
+            atendimento = new Atendimento();
+        }
+        return atendimento;
+    }
 
     public Date getDataInicial() {
         return dataInicial;
@@ -37,15 +45,16 @@ public class AtendimentoCoordenador {
         this.dataFinal = dataFinal;
     }
 
-    public Atendimento getAtendimento() {
-        if (this.atendimento == null) {
-            atendimento = new Atendimento();
-        }
-        return atendimento;
-    }
-
     public void setAtendimento(Atendimento atendimento) {
         this.atendimento = atendimento;
+    }
+
+    public String getLoginUsuarioSelecionado() {
+        return LoginUsuarioSelecionado;
+    }
+
+    public void setLoginUsuarioSelecionado(String LoginUsuarioSelecionado) {
+        this.LoginUsuarioSelecionado = LoginUsuarioSelecionado;
     }
 
     public void alterarChamado() {
@@ -65,15 +74,18 @@ public class AtendimentoCoordenador {
 
     public List getAtendimentosTecnico() {
         atendimentoDao = new AtendimentoDao();
-        return atendimentoDao.listarAtendimento(usuario, dataInicial, dataFinal);
+        if (LoginUsuarioSelecionado != null) {
+            preparaFiltrarUsuario();
+        }
+        return atendimentoDao.listarAtendimento(this.usuario, dataInicial, dataFinal);
     }
 
     public void preparaAlterarChamado(Atendimento atendimento) {
         this.atendimento = atendimento;
     }
-    
-    public void preparaFiltrarUsuario(String login) {
+
+    public void preparaFiltrarUsuario() {
         usuarioDao = new UsuarioDao();
-        this.usuario = usuarioDao.buscaLogin(login);
+        this.usuario = usuarioDao.buscaLogin(LoginUsuarioSelecionado);
     }
 }
