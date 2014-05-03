@@ -4,6 +4,7 @@ import com.kmcontrol.dao.AtendimentoDao;
 import com.kmcontrol.dao.UsuarioDao;
 import com.kmcontrol.entities.Atendimento;
 import com.kmcontrol.entities.Usuario;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -19,8 +20,15 @@ public class AtendimentoCoordenador {
     private AtendimentoDao atendimentoDao;
     private UsuarioDao usuarioDao;
     private Usuario usuario;
-    private Date dataInicial, dataFinal;
+    private Date dataInicial;
+    private Date dataFinal;
     private String LoginUsuarioSelecionado;
+
+    public AtendimentoCoordenador() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        this.dataInicial = calendar.getTime();
+    }
 
     public Atendimento getAtendimento() {
         if (this.atendimento == null) {
@@ -84,7 +92,7 @@ public class AtendimentoCoordenador {
         this.atendimento = atendimento;
     }
 
-    public void preparaFiltrarUsuario() {
+    private void preparaFiltrarUsuario() {
         usuarioDao = new UsuarioDao();
         this.usuario = usuarioDao.buscaLogin(LoginUsuarioSelecionado);
     }

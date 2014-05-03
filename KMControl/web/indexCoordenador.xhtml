@@ -181,7 +181,9 @@
         <!-- FIM Modal para alterar os dados do usuario -->
 
         <!-- INICIO Modal para alterar os dados do chamado -->
-        <ui:include src="dialogAlteraChamado.xhtml" />
+        <ui:include src="dialogAlteraChamado.xhtml" >
+            <ui:param name="dialogChamado" value="#{AtendimentoCoordenador}" />
+        </ui:include>
         <!-- FIM Modal para alterar os dados do chamado -->
 
     </h:body>

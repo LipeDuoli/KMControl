@@ -11,25 +11,25 @@
                     <p:panelGrid>
                         <p:row>
                             <p:column>Data: </p:column>
-                            <p:column><p:calendar value="#{AtendimentoTecnico.atendimento.data}" required="true" label="Data" id="data" locale="pt" pattern="dd/MM/yyyy" disabled="true"/> </p:column>
+                            <p:column><p:calendar value="#{dialogChamado.atendimento.data}" required="true" label="Data" id="data" locale="pt" pattern="dd/MM/yyyy" disabled="true"/> </p:column>
                             <p:column>Chamado: </p:column>
-                            <p:column><p:inputText value="#{AtendimentoTecnico.atendimento.chamado}" required="true" label="Chamado" id="chamado" disabled="true"/></p:column>
+                            <p:column><p:inputText value="#{dialogChamado.atendimento.chamado}" required="true" label="Chamado" id="chamado" disabled="true"/></p:column>
                             <p:column>OBS Atendimento: </p:column>
                         </p:row>
                         <p:row>
                             <p:column>Origem:* </p:column>
-                            <p:column colspan="3"><p:inputText value="#{AtendimentoTecnico.atendimento.origem}" size="62" required="true" label="Origem" id="origem"/></p:column>
-                            <p:column rowspan="3"><p:inputTextarea rows="5" cols="40" maxlength="255" autoResize="false" value="#{AtendimentoTecnico.atendimento.obsAtendimento}"/></p:column>
+                            <p:column colspan="3"><p:inputText value="#{dialogChamado.atendimento.origem}" size="62" required="true" label="Origem" id="origem"/></p:column>
+                            <p:column rowspan="3"><p:inputTextarea rows="5" cols="40" maxlength="255" autoResize="false" value="#{dialogChamado.atendimento.obsAtendimento}"/></p:column>
                         </p:row>
                         <p:row>
                             <p:column>Destino:* </p:column>
-                            <p:column colspan="3"><p:inputText value="#{AtendimentoTecnico.atendimento.destino}" size="62" required="true" label="Destino" id="destino"/></p:column>
+                            <p:column colspan="3"><p:inputText value="#{dialogChamado.atendimento.destino}" size="62" required="true" label="Destino" id="destino"/></p:column>
                         </p:row>
                         <p:row>
                             <p:column>KM Inicial:* </p:column>
-                            <p:column><p:inputText value="#{AtendimentoTecnico.atendimento.kminicial}" required="true" label="KM Inicial" id="kminicial"/></p:column>
+                            <p:column><p:inputText value="#{dialogChamado.atendimento.kminicial}" required="true" label="KM Inicial" id="kminicial"/></p:column>
                             <p:column>KM Final:* </p:column>
-                            <p:column><p:inputText value="#{AtendimentoTecnico.atendimento.kmfinal}" required="true" label="KM Final" id="kmfinal"/></p:column>
+                            <p:column><p:inputText value="#{dialogChamado.atendimento.kmfinal}" required="true" label="KM Final" id="kmfinal"/></p:column>
                         </p:row>
                         <p:row>
                             <p:column colspan="5">
@@ -41,15 +41,15 @@
                             <p:column>Estacionamento</p:column>
                         </p:row>
                         <p:row>
-                            <p:column><p:spinner value="#{AtendimentoTecnico.atendimento.qtdHospedagem}" min="0" size="1"/></p:column>
+                            <p:column><p:spinner value="#{dialogChamado.atendimento.qtdHospedagem}" min="0" size="1"/></p:column>
                             <p:column colspan="2">
-                                <p:inputText value="#{AtendimentoTecnico.atendimento.valorHospedagem}" label="ValorHospedagem" id="ValorHospedagem" />
+                                <p:inputText value="#{dialogChamado.atendimento.valorHospedagem}" label="ValorHospedagem" id="ValorHospedagem" />
                                 <p:watermark for="ValorHospedagem" value="Valor"/>
                             </p:column>
                             <p:column colspan="2">
-                                <p:spinner value="#{AtendimentoTecnico.atendimento.qtdEstacionamento}" min="0" size="1" />
+                                <p:spinner value="#{dialogChamado.atendimento.qtdEstacionamento}" min="0" size="1" />
                                 <p:spacer style="padding-right: 20px"/>
-                                <p:inputText value="#{AtendimentoTecnico.atendimento.valorEstacionamento}" label="ValorEstacionamento" id="ValorEstacionamento" />
+                                <p:inputText value="#{dialogChamado.atendimento.valorEstacionamento}" label="ValorEstacionamento" id="ValorEstacionamento" />
                                 <p:watermark for="ValorEstacionamento" value="Valor"/>
                             </p:column>
                         </p:row>
@@ -58,15 +58,15 @@
                             <p:column>Alimentação</p:column>
                         </p:row>
                         <p:row>
-                            <p:column><p:spinner value="#{AtendimentoTecnico.atendimento.qtdPedagio}" min="0" size="1"/></p:column>
+                            <p:column><p:spinner value="#{dialogChamado.atendimento.qtdPedagio}" min="0" size="1"/></p:column>
                             <p:column colspan="2">
-                                <p:inputText value="#{AtendimentoTecnico.atendimento.valorPedagio}" label="ValorPedagio" id="ValorPedagio" />
+                                <p:inputText value="#{dialogChamado.atendimento.valorPedagio}" label="ValorPedagio" id="ValorPedagio" />
                                 <p:watermark for="ValorPedagio" value="Valor"/>
                             </p:column>
                             <p:column colspan="2">
-                                <p:spinner value="#{AtendimentoTecnico.atendimento.qtdAlimentacao}" min="0" size="1" />
+                                <p:spinner value="#{dialogChamado.atendimento.qtdAlimentacao}" min="0" size="1" />
                                 <p:spacer style="padding-right: 20px"/>
-                                <p:inputText value="#{AtendimentoTecnico.atendimento.valorAlimentacao}" label="ValorAlimentação" id="ValorAlimentação" />
+                                <p:inputText value="#{dialogChamado.atendimento.valorAlimentacao}" label="ValorAlimentação" id="ValorAlimentação" />
                                 <p:watermark for="ValorAlimentação" value="Valor"/>
                             </p:column>
                         </p:row>
@@ -78,7 +78,7 @@
                         <p:row>
                             <p:column colspan="3">
                                 <p:commandButton value="Alterar Dados" 
-                                                 action="#{AtendimentoTecnico.alterarChamado()}" 
+                                                 action="#{dialogChamado.alterarChamado()}" 
                                                  ajax="false" 
                                                  />
                             </p:column>

@@ -5,6 +5,7 @@ import com.kmcontrol.dao.UsuarioDao;
 import com.kmcontrol.entities.Atendimento;
 import com.kmcontrol.entities.Usuario;
 import com.kmcontrol.util.SessionUtil;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -19,7 +20,14 @@ public class AtendimentoTecnico {
     private Atendimento atendimento;
     private AtendimentoDao atendimentoDao;
     private UsuarioDao usuarioDao;
-    private Date dataInicial, dataFinal;
+    private Date dataInicial;
+    private Date dataFinal;
+
+    public AtendimentoTecnico() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        this.dataInicial = calendar.getTime();
+    }
 
     public Date getDataInicial() {
         return dataInicial;
