@@ -27,9 +27,12 @@
                                         <p:row>
                                             <p:column>Técnico: </p:column>
                                             <p:column>
-                                                <p:selectOneMenu>
-                                                    <f:selectItem itemLabel=" " itemValue="null" />
-                                                    <f:selectItems id="tecnicos" value="#{usuario.listaTecnicos}" var="tecnicos" itemLabel="#{tecnicos.nome}" itemValue="#{tecnicos.login}" /> 
+                                                <p:selectOneMenu value="#{AtendimentoCoordenador.loginUsuarioSelecionado}" >
+                                                    <f:selectItem itemLabel="" itemValue="null" />
+                                                    <f:selectItems id="tecnicos" 
+                                                                   value="#{usuario.listaTecnicos}" 
+                                                                   var="tecnicos" itemLabel="#{tecnicos.nome}" 
+                                                                   itemValue="#{tecnicos.login}" /> 
                                                 </p:selectOneMenu>
                                             </p:column>
                                             <p:column>Data Inicial: </p:column>
@@ -39,6 +42,7 @@
                                                             locale="pt" 
                                                             pattern="dd/MM/yyyy" 
                                                             label="#{ui['calendar.start']}" >
+                                                    <p:ajax event="dateSelect" update="endDate" />
                                                 </p:calendar>
                                             </p:column>
                                             <p:column>Data Final: </p:column>
@@ -86,15 +90,15 @@
                                         <h:outputText value="#{AtendimentoCoordenador.getKmFinal(reg.kminicial, reg.kmfinal)}"/>
                                     </p:column>
                                     <p:column headerText="Ações" width="60">
-                                            <center>
-                                                <p:commandButton icon="ui-icon-circle-zoomout" 
-                                                                 label="Detalhes" 
-                                                                 action="#{AtendimentoCoordenador.preparaAlterarChamado(reg)}" 
-                                                                 onsuccess="alteraChamado.show();"
-                                                                 update=":panelGroupAlteraChamado"
-                                                                 ajax="true" />
-                                            </center>
-                                        </p:column>
+                                        <center>
+                                            <p:commandButton icon="ui-icon-circle-zoomout" 
+                                                             label="Detalhes" 
+                                                             action="#{AtendimentoCoordenador.preparaAlterarChamado(reg)}" 
+                                                             onsuccess="alteraChamado.show();"
+                                                             update=":panelGroupAlteraChamado"
+                                                             ajax="true" />
+                                        </center>
+                                    </p:column>
                                 </p:dataTable>
                             </div>
                         </h:form>

@@ -14,9 +14,9 @@
         <title>KMControl</title>
     </h:head>
     <h:body>
-        
+
         <ui:include src="header.xhtml" />
-        
+
         <div class="container-fluid">
             <div class="row">
                 <p:tabView id="tabs">
@@ -34,6 +34,7 @@
                                                                 locale="pt" 
                                                                 pattern="dd/MM/yyyy" 
                                                                 label="#{ui['calendar.start']}" >
+                                                        <p:ajax event="dateSelect" update="endDate" />
                                                     </p:calendar>
                                                 </p:column>
                                                 <p:column>Data Final: </p:column>
@@ -185,7 +186,7 @@
         </div>
 
         <!-- INICIO Modal para alterar os dados do usuario -->
-        <ui:include src="dialogAlteraUsuario.xhtml" />
+        <ui:include src="dialogAlteraUsuario.xhtml" />                    
         <!-- FIM Modal para alterar os dados do usuario -->
 
         <!-- INICIO Modal para alterar os dados do chamado -->
