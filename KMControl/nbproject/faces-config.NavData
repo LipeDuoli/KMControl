@@ -7,8 +7,8 @@
         <Node id="indexTecnico.xhtml" x="400" y="300" zoom="true"/>
         <Node id="layout/footer.xhtml" x="150" y="150" zoom="true"/>
         <Node id="indexCoordenador.xhtml" x="150" y="300" zoom="true"/>
-        <Node id="layout/header.xhtml" x="900" y="150" zoom="true"/>
         <Node id="layout/headeIndex.xhtml" x="150" y="450" zoom="true"/>
+        <Node id="layout/header.xhtml" x="900" y="150" zoom="true"/>
     </Scope>
     <Scope Scope="All Faces Configurations"/>
 </Scene>
