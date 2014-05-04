@@ -57,7 +57,7 @@
                                     </center>
                                 </div>
                                 <div class="row">
-                                    <p:dataTable id="atendimentos" value="#{AtendimentoTecnico.atendimentosTecnico}" var="reg">
+                                    <p:dataTable id="atendimentos" value="#{AtendimentoTecnico.atendimentosTecnico}" var="reg" emptyMessage="Nenhum chamado encontrado no periodo selecionado." >
                                         <p:column headerText="Data">
                                             <h:outputText value="#{reg.data}" >
                                                 <f:convertDateTime pattern="dd/MM/yyyy" />
@@ -192,6 +192,7 @@
         <!-- INICIO Modal para alterar os dados do chamado -->
         <ui:include src="dialogAlteraChamado.xhtml" >
             <ui:param name="dialogChamado" value="#{AtendimentoTecnico}" />
+            <ui:param name="motivoalterachamado" value="true" />
         </ui:include>
         <!-- FIM Modal para alterar os dados do chamado -->
 

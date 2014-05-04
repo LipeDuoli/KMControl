@@ -53,13 +53,16 @@ public class LoginMB implements Serializable {
     public String logout() {
         HttpSession session = SessionUtil.getSession();
         session.invalidate();
-        return "index";
+        return "index?faces-redirect=true";
     }
 
     public void alteraDados() {
         dao = new UsuarioDao();
-        String pass = Hashing.sha1().hashString(usuario.getSenha(), Charsets.UTF_8).toString();
-        usuario.setSenha(pass);
-        dao.alterar(this.usuario);
+        try {
+            dao.alterar(this.usuario);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Dados alterados com Sucesso.", "Dados alterados com Sucesso."));
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao alterar os dados.", "Erro ao alterar os dados."));
+        }
     }
 }

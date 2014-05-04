@@ -41,14 +41,15 @@
                             <p:column>Estacionamento</p:column>
                         </p:row>
                         <p:row>
-                            <p:column><p:spinner value="#{dialogChamado.atendimento.qtdHospedagem}" min="0" size="1"/></p:column>
                             <p:column colspan="2">
+                                <p:spinner value="#{dialogChamado.atendimento.qtdHospedagem}" min="0" size="1"/>
+                                <p:spacer style="padding-right: 15px"/>
                                 <p:inputText value="#{dialogChamado.atendimento.valorHospedagem}" label="ValorHospedagem" id="ValorHospedagem" />
                                 <p:watermark for="ValorHospedagem" value="Valor"/>
                             </p:column>
                             <p:column colspan="2">
                                 <p:spinner value="#{dialogChamado.atendimento.qtdEstacionamento}" min="0" size="1" />
-                                <p:spacer style="padding-right: 20px"/>
+                                <p:spacer style="padding-right: 15px"/>
                                 <p:inputText value="#{dialogChamado.atendimento.valorEstacionamento}" label="ValorEstacionamento" id="ValorEstacionamento" />
                                 <p:watermark for="ValorEstacionamento" value="Valor"/>
                             </p:column>
@@ -58,23 +59,28 @@
                             <p:column>Alimentação</p:column>
                         </p:row>
                         <p:row>
-                            <p:column><p:spinner value="#{dialogChamado.atendimento.qtdPedagio}" min="0" size="1"/></p:column>
                             <p:column colspan="2">
+                                <p:spinner value="#{dialogChamado.atendimento.qtdPedagio}" min="0" size="1"/>
+                                <p:spacer style="padding-right: 15px"/>
                                 <p:inputText value="#{dialogChamado.atendimento.valorPedagio}" label="ValorPedagio" id="ValorPedagio" />
                                 <p:watermark for="ValorPedagio" value="Valor"/>
                             </p:column>
                             <p:column colspan="2">
                                 <p:spinner value="#{dialogChamado.atendimento.qtdAlimentacao}" min="0" size="1" />
-                                <p:spacer style="padding-right: 20px"/>
+                                <p:spacer style="padding-right: 15px"/>
                                 <p:inputText value="#{dialogChamado.atendimento.valorAlimentacao}" label="ValorAlimentação" id="ValorAlimentação" />
                                 <p:watermark for="ValorAlimentação" value="Valor"/>
                             </p:column>
                         </p:row>
                         <p:row>
+                            <p:column colspan="5">Motivo Alteração do chamado</p:column>
+                        </p:row>
+                        <p:row>
                             <p:column colspan="5">
-                                <p:spacer />
+                                <p:inputTextarea value="#{dialogChamado.atendimento.motivoAlteracao}" rows="3" cols="100" maxlength="255" autoResize="false" label="Motivo Alteração" id="motivoAlteracao" disabled="#{motivoalterachamado}" />
                             </p:column>
                         </p:row>
+
                         <p:row>
                             <p:column colspan="3">
                                 <p:commandButton value="Alterar Dados" 

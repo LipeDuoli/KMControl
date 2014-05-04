@@ -46,7 +46,6 @@ public class UsuarioController {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario Cadastrado com sucesso", "Usuario Cadastrado com sucesso"));
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERRO", "Usuario informado já existe"));
-
         }
     }
 
@@ -59,7 +58,12 @@ public class UsuarioController {
 
     public void excluir(Usuario usuario) {
         dao = new UsuarioDao();
-        dao.excluir(usuario);
+        try {
+            dao.excluir(usuario);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario excluido com sucesso", "Usuario excluido com sucesso"));
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao excuir o Usuario", "Erro ao excuir o Usuario"));
+        }
     }
 
 }
