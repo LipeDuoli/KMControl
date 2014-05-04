@@ -53,8 +53,8 @@ CREATE TABLE IF NOT EXISTS `dbkm`.`atendimento` (
   CONSTRAINT `fk_atendimento_usuario1`
     FOREIGN KEY (`usuario_id`)
     REFERENCES `dbkm`.`usuario` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -90,4 +90,3 @@ USE `dbkm`;
 INSERT INTO `dbkm`.`tabela_preco` (`id`, `km`) VALUES (1, 0.55);
 
 COMMIT;
-
