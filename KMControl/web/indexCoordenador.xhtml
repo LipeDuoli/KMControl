@@ -104,6 +104,27 @@
                         </h:form>
                         <p:messages autoUpdate="true" closable="true" showDetail="false" />
                     </p:tab>
+                    <p:tab title="Prestação de Contas" id="tabSevico">
+                        <div class="row">
+                            <h:form id="prestacaoServico">
+                                <p:panelGrid style="width: 100px;" >
+                                    <p:row>
+                                        <p:column colspan="2">
+                                            <h4>Valor do KM</h4>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>
+                                            <p:inputText id="valorKm" value="#{PrestacaoContas.tabelaPreco.km}" size="5" />
+                                        </p:column>
+                                        <p:column>
+                                            <p:commandButton label="OK" value="OK" ajax="false" />
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                            </h:form>
+                        </div>
+                    </p:tab>
                     <p:tab title="Gerenciar Usuarios" id="tabUsuarios">
                         <h:panelGroup id="GerenciarUsuario" >
                             <h:form>
