@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Table(name = "tabela_preco", catalog = "dbkm")
 public class TabelaPreco implements java.io.Serializable {
 
-    private Long id;
+    private Integer id;
     private double km;
 
     public TabelaPreco() {
@@ -25,11 +25,11 @@ public class TabelaPreco implements java.io.Serializable {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
-    public Long getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

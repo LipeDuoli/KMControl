@@ -1,11 +1,14 @@
 package com.kmcontrol.dao;
 
+import com.kmcontrol.entities.TabelaPreco;
 import com.kmcontrol.util.HibernateUtil;
 import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 public class TabelaPrecoDao implements IDao {
 
@@ -61,6 +64,19 @@ public class TabelaPrecoDao implements IDao {
             transaction = session.beginTransaction();
             Query query = session.createQuery("FROM TabelaPreco");
             return query.list();
+        } catch (HibernateException he) {
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public TabelaPreco carregaKm(){
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            TabelaPreco t = (TabelaPreco) session.get(TabelaPreco.class, new Integer(1));
+            return t;
         } catch (HibernateException he) {
             return null;
         } finally {

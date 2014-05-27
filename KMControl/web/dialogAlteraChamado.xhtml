@@ -13,7 +13,11 @@
                             <p:column>Data: </p:column>
                             <p:column><p:calendar value="#{dialogChamado.atendimento.data}" required="true" label="Data" id="data" locale="pt" pattern="dd/MM/yyyy" disabled="true"/> </p:column>
                             <p:column>Chamado: </p:column>
-                            <p:column><p:inputText value="#{dialogChamado.atendimento.chamado}" required="true" label="Chamado" id="chamado" disabled="true"/></p:column>
+                            <p:column>
+                                <p:inputText value="#{dialogChamado.atendimento.chamado}" required="true" label="Chamado" id="chamado" disabled="true" >
+                                    <f:convertNumber type="number" integerOnly="true" groupingUsed="false" />
+                                </p:inputText>
+                            </p:column>
                             <p:column>OBS Atendimento: </p:column>
                         </p:row>
                         <p:row>
@@ -27,9 +31,17 @@
                         </p:row>
                         <p:row>
                             <p:column>KM Inicial:* </p:column>
-                            <p:column><p:inputText value="#{dialogChamado.atendimento.kminicial}" required="true" label="KM Inicial" id="kminicial"/></p:column>
+                            <p:column>
+                                <p:inputText value="#{dialogChamado.atendimento.kminicial}" required="true" label="KM Inicial" id="kminicial" >
+                                    <f:convertNumber type="number" integerOnly="true" groupingUsed="false" />
+                                </p:inputText> 
+                            </p:column>
                             <p:column>KM Final:* </p:column>
-                            <p:column><p:inputText value="#{dialogChamado.atendimento.kmfinal}" required="true" label="KM Final" id="kmfinal"/></p:column>
+                            <p:column>
+                                <p:inputText value="#{dialogChamado.atendimento.kmfinal}" required="true" label="KM Final" id="kmfinal" >
+                                    <f:convertNumber type="number" integerOnly="true" groupingUsed="false" />
+                                </p:inputText>
+                            </p:column>
                         </p:row>
                         <p:row>
                             <p:column colspan="5">

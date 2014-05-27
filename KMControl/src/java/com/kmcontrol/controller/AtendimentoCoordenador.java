@@ -7,10 +7,12 @@ import com.kmcontrol.entities.Usuario;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.persistence.PostPersist;
 
 @ManagedBean(name = "AtendimentoCoordenador")
 @ViewScoped
@@ -25,6 +27,10 @@ public class AtendimentoCoordenador {
     private String LoginUsuarioSelecionado;
 
     public AtendimentoCoordenador() {
+    }
+
+    @PostConstruct
+    public void carregaData() {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.DAY_OF_MONTH, 1);
         this.dataInicial = calendar.getTime();

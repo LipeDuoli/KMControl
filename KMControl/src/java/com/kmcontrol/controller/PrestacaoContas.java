@@ -1,20 +1,23 @@
 package com.kmcontrol.controller;
 
+import com.kmcontrol.dao.TabelaPrecoDao;
 import com.kmcontrol.entities.Atendimento;
 import com.kmcontrol.entities.TabelaPreco;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 @ManagedBean(name = "PrestacaoContas")
 @ViewScoped
 public class PrestacaoContas {
-    
+
     private TabelaPreco tabelaPreco;
+    private TabelaPrecoDao tabelaPrecoDao = new TabelaPrecoDao();
     private Atendimento atendimento;
 
     public PrestacaoContas() {
     }
-    
+
     public TabelaPreco getTabelaPreco() {
         return tabelaPreco;
     }
@@ -22,6 +25,11 @@ public class PrestacaoContas {
     public void setTabelaPreco(TabelaPreco tabelaPreco) {
         this.tabelaPreco = tabelaPreco;
     }
-    
+
+    @PostConstruct
+    private void carregaCampos() {
+        tabelaPreco = new TabelaPreco();
+        tabelaPreco = tabelaPrecoDao.carregaKm();
+    }
 
 }
