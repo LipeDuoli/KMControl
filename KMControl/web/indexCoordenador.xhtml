@@ -20,88 +20,90 @@
             <div class="row">
                 <p:tabView id="tabs">
                     <p:tab title="Gerenciar Chamados" id="tabChamados">
-                        <h:form id="geranciarChamados">
-                            <div class="row">
-                                <center>
-                                    <p:panelGrid>
-                                        <p:row>
-                                            <p:column>Técnico: </p:column>
-                                            <p:column>
-                                                <p:selectOneMenu value="#{AtendimentoCoordenador.loginUsuarioSelecionado}" >
-                                                    <f:selectItem itemLabel="" itemValue="null" />
-                                                    <f:selectItems id="tecnicos" 
-                                                                   value="#{usuario.listaTecnicos}" 
-                                                                   var="tecnicos" itemLabel="#{tecnicos.nome}" 
-                                                                   itemValue="#{tecnicos.login}" /> 
-                                                </p:selectOneMenu>
-                                            </p:column>
-                                            <p:column>Data Inicial: </p:column>
-                                            <p:column>
-                                                <p:calendar id="startDate" 
-                                                            value="#{AtendimentoCoordenador.dataInicial}"
-                                                            locale="pt" 
-                                                            pattern="dd/MM/yyyy" 
-                                                            label="#{ui['calendar.start']}" >
-                                                    <p:ajax event="dateSelect" update="endDate" />
-                                                </p:calendar>
-                                            </p:column>
-                                            <p:column>Data Final: </p:column>
-                                            <p:column>
-                                                <p:calendar id="endDate" 
-                                                            value="#{AtendimentoCoordenador.dataFinal}" 
-                                                            locale="pt" 
-                                                            pattern="dd/MM/yyyy" 
-                                                            mindate="#{AtendimentoCoordenador.dataInicial}"
-                                                            label="#{ui['calendar.end']}" >
-                                                    <f:attribute name="startDate" value="#{AtendimentoCoordenador.dataInicial}" />
-                                                    <f:validator validatorId="primeDateRangeValidator" />
-                                                </p:calendar>
-                                            </p:column>
-                                            <p:column>
-                                                <p:commandButton value="OK" ajax="false"/>
-                                            </p:column>
-                                        </p:row>
-                                    </p:panelGrid>
-                                </center>
-                            </div>
-                            <div class="row">
-                                <p:dataTable value="#{AtendimentoCoordenador.atendimentosTecnico}" var="reg" emptyMessage="Nenhum chamado encontrado no periodo selecionado." >
-                                    <p:column headerText="Data">
-                                        <h:outputText value="#{reg.data}" >
-                                            <f:convertDateTime pattern="dd/MM/yyyy" />
-                                        </h:outputText>
-                                    </p:column>
-                                    <p:column headerText="Chamado">
-                                        <h:outputText value="#{reg.chamado}" />
-                                    </p:column>
-                                    <p:column headerText="Origem">
-                                        <h:outputText value="#{reg.origem}"/>
-                                    </p:column>
-                                    <p:column headerText="Destino">
-                                        <h:outputText value="#{reg.destino}"/>
-                                    </p:column>
-                                    <p:column headerText="KM Inicial">
-                                        <h:outputText value="#{reg.kminicial}"/>
-                                    </p:column>
-                                    <p:column headerText="KM Final">
-                                        <h:outputText value="#{reg.kmfinal}"/>
-                                    </p:column>
-                                    <p:column headerText="KM Rodado">
-                                        <h:outputText value="#{AtendimentoCoordenador.getKmFinal(reg.kminicial, reg.kmfinal)}"/>
-                                    </p:column>
-                                    <p:column headerText="Ações" width="60">
-                                        <center>
-                                            <p:commandButton icon="ui-icon-circle-zoomout" 
-                                                             label="Detalhes" 
-                                                             action="#{AtendimentoCoordenador.preparaAlterarChamado(reg)}" 
-                                                             onsuccess="alteraChamado.show();"
-                                                             update=":panelGroupAlteraChamado"
-                                                             ajax="true" />
-                                        </center>
-                                    </p:column>
-                                </p:dataTable>
-                            </div>
-                        </h:form>
+                        <h:panelGroup id="panelGerenciarChamado">
+                            <h:form id="geranciarChamados">
+                                <div class="row">
+                                    <center>
+                                        <p:panelGrid>
+                                            <p:row>
+                                                <p:column>Técnico: </p:column>
+                                                <p:column>
+                                                    <p:selectOneMenu value="#{AtendimentoCoordenador.loginUsuarioSelecionado}" >
+                                                        <f:selectItem itemLabel="Selecione..." noSelectionOption="true" /> 
+                                                        <f:selectItems id="tecnicos" 
+                                                                       value="#{usuario.listaTecnicos}" 
+                                                                       var="tecnicos" itemLabel="#{tecnicos.nome}" 
+                                                                       itemValue="#{tecnicos.login}" /> 
+                                                    </p:selectOneMenu>
+                                                </p:column>
+                                                <p:column>Data Inicial: </p:column>
+                                                <p:column>
+                                                    <p:calendar id="startDate" 
+                                                                value="#{AtendimentoCoordenador.dataInicial}"
+                                                                locale="pt" 
+                                                                pattern="dd/MM/yyyy" 
+                                                                label="#{ui['calendar.start']}" >
+                                                        <p:ajax event="dateSelect" update="endDate" />
+                                                    </p:calendar>
+                                                </p:column>
+                                                <p:column>Data Final: </p:column>
+                                                <p:column>
+                                                    <p:calendar id="endDate" 
+                                                                value="#{AtendimentoCoordenador.dataFinal}" 
+                                                                locale="pt" 
+                                                                pattern="dd/MM/yyyy" 
+                                                                mindate="#{AtendimentoCoordenador.dataInicial}"
+                                                                label="#{ui['calendar.end']}" >
+                                                        <f:attribute name="startDate" value="#{AtendimentoCoordenador.dataInicial}" />
+                                                        <f:validator validatorId="primeDateRangeValidator" />
+                                                    </p:calendar>
+                                                </p:column>
+                                                <p:column>
+                                                    <p:commandButton value="OK" ajax="false"/>
+                                                </p:column>
+                                            </p:row>
+                                        </p:panelGrid>
+                                    </center>
+                                </div>
+                                <div class="row">
+                                    <p:dataTable value="#{AtendimentoCoordenador.atendimentosTecnico}" var="reg" emptyMessage="Nenhum chamado encontrado no periodo selecionado." >
+                                        <p:column headerText="Data">
+                                            <h:outputText value="#{reg.data}" >
+                                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column headerText="Chamado">
+                                            <h:outputText value="#{reg.chamado}" />
+                                        </p:column>
+                                        <p:column headerText="Origem">
+                                            <h:outputText value="#{reg.origem}"/>
+                                        </p:column>
+                                        <p:column headerText="Destino">
+                                            <h:outputText value="#{reg.destino}"/>
+                                        </p:column>
+                                        <p:column headerText="KM Inicial">
+                                            <h:outputText value="#{reg.kminicial}"/>
+                                        </p:column>
+                                        <p:column headerText="KM Final">
+                                            <h:outputText value="#{reg.kmfinal}"/>
+                                        </p:column>
+                                        <p:column headerText="KM Rodado">
+                                            <h:outputText value="#{AtendimentoCoordenador.getKmFinal(reg.kminicial, reg.kmfinal)}"/>
+                                        </p:column>
+                                        <p:column headerText="Ações" width="60">
+                                            <center>
+                                                <p:commandButton icon="ui-icon-circle-zoomout" 
+                                                                 label="Detalhes" 
+                                                                 action="#{AtendimentoCoordenador.preparaAlterarChamado(reg)}" 
+                                                                 onsuccess="alteraChamado.show();"
+                                                                 update=":panelGroupAlteraChamado"
+                                                                 ajax="true" />
+                                            </center>
+                                        </p:column>
+                                    </p:dataTable>
+                                </div>
+                            </h:form>
+                        </h:panelGroup>
                         <p:messages autoUpdate="true" closable="true" showDetail="false" />
                     </p:tab>
                     <p:tab title="Prestação de Contas" id="tabSevico">
@@ -118,7 +120,40 @@
                                             <p:inputText id="valorKm" value="#{PrestacaoContas.tabelaPreco.km}" size="5" />
                                         </p:column>
                                         <p:column>
-                                            <p:commandButton label="OK" value="OK" ajax="false" />
+                                            <p:commandButton label="OK" value="OK" ajax="false" action="#{PrestacaoContas.atualizaValorKm()}" />
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                            </h:form>
+                            <h:form id="formRelatorio">
+                                <p:panelGrid>
+                                    <p:row>
+                                        <p:column colspan="2">
+                                            <h4>Gerar Relatorio</h4>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>Data Inicial: </p:column>
+                                        <p:column>
+                                            <p:calendar id="startDate" 
+                                                        value="#{PrestacaoContas.dataInicial}"
+                                                        locale="pt" 
+                                                        pattern="dd/MM/yyyy" 
+                                                        label="#{ui['calendar.start']}" >
+                                                <p:ajax event="dateSelect" update="endDate" />
+                                            </p:calendar>
+                                        </p:column>
+                                        <p:column>Data Final: </p:column>
+                                        <p:column>
+                                            <p:calendar id="endDate" 
+                                                        value="#{PrestacaoContas.dataFinal}" 
+                                                        locale="pt" 
+                                                        pattern="dd/MM/yyyy" 
+                                                        mindate="#{PrestacaoContas.dataInicial}"
+                                                        label="#{ui['calendar.end']}" >
+                                                <f:attribute name="startDate" value="#{PrestacaoContas.dataInicial}" />
+                                                <f:validator validatorId="primeDateRangeValidator" />
+                                            </p:calendar>
                                         </p:column>
                                     </p:row>
                                 </p:panelGrid>
@@ -143,7 +178,8 @@
                                             <p:commandButton icon="ui-icon-circle-close" 
                                                              label="Excluir"
                                                              action="#{usuario.excluir(usuarios)}"
-                                                             ajax="false" 
+                                                             ajax="true" 
+                                                             update=":panelCadastraUsuario, :tabs:GerenciarUsuario, :tabs:panelGerenciarChamado"
                                                              immediate="true" />
                                         </center>
                                     </p:column>
@@ -239,7 +275,7 @@
                                                  label="Salva Usuario"
                                                  action="#{usuario.inserirUsuario()}"
                                                  ajax="true"
-                                                 update=":panelCadastraUsuario, :tabs:GerenciarUsuario"
+                                                 update=":panelCadastraUsuario, :tabs:GerenciarUsuario, :tabs:panelGerenciarChamado"
                                                  oncomplete="if (args &amp;&amp; !args.validationFailed) cadastraUsuario.hide();" />
                             </p:column>
                         </p:row>
