@@ -77,19 +77,21 @@ public class AtendimentoDao implements IDao {
         }
     }
 
-    public List<Object> listarAtendimento(Usuario usuario, Date dataInicial, Date dataFinal) {
+    public List<Atendimento> listarAtendimento(Usuario usuario, Date dataInicial, Date dataFinal, String ordem) {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             Criteria criteria = session.createCriteria(Atendimento.class);
-            criteria.add(Restrictions.eq("usuario", usuario));
+            if (usuario != null) {
+                criteria.add(Restrictions.eq("usuario", usuario));
+            }
             if (dataInicial != null) {
                 criteria.add(Expression.ge("data", dataInicial));
             }
             if (dataFinal != null) {
                 criteria.add(Expression.le("data", dataFinal));
             }
-            criteria.addOrder(Order.asc("data"));
+            criteria.addOrder(Order.asc(ordem));
             return criteria.list();
         } catch (HibernateException he) {
             return null;

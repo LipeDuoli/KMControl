@@ -88,7 +88,7 @@ public class AtendimentoTecnico {
         atendimentoDao = new AtendimentoDao();
         usuarioDao = new UsuarioDao();
         Usuario usuario = new UsuarioDao().buscaLogin(SessionUtil.getLogin());
-        return atendimentoDao.listarAtendimento(usuario, dataInicial, dataFinal);
+        return atendimentoDao.listarAtendimento(usuario, dataInicial, dataFinal, "data");
     }
 
     public void deletarAtendimento(Atendimento u) {

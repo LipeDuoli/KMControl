@@ -12,7 +12,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.persistence.PostPersist;
 
 @ManagedBean(name = "AtendimentoCoordenador")
 @ViewScoped
@@ -91,7 +90,7 @@ public class AtendimentoCoordenador {
         if (LoginUsuarioSelecionado != null) {
             preparaFiltrarUsuario();
         }
-        return atendimentoDao.listarAtendimento(this.usuario, dataInicial, dataFinal);
+        return atendimentoDao.listarAtendimento(this.usuario, dataInicial, dataFinal, "data");
     }
 
     public void preparaAlterarChamado(Atendimento atendimento) {

@@ -1,9 +1,11 @@
 package com.kmcontrol.controller;
 
+import com.kmcontrol.dao.AtendimentoDao;
 import com.kmcontrol.dao.TabelaPrecoDao;
 import com.kmcontrol.entities.Atendimento;
 import com.kmcontrol.entities.TabelaPreco;
 import java.util.Date;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -14,7 +16,7 @@ public class PrestacaoContas {
 
     private TabelaPreco tabelaPreco;
     private TabelaPrecoDao tabelaPrecoDao = new TabelaPrecoDao();
-    private Atendimento atendimento;
+    private List<Atendimento> atendimentos;
     private Date dataInicial;
     private Date dataFinal;
 
@@ -53,6 +55,10 @@ public class PrestacaoContas {
 
     public void atualizaValorKm() {
         tabelaPrecoDao.alterar(tabelaPreco);
+    }
+    
+    public void geraPlanilha(){
+        
     }
 
 }
