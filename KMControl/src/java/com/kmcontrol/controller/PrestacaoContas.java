@@ -1,5 +1,6 @@
 package com.kmcontrol.controller;
 
+import com.kmcontrol.arquivos.GeraRelatorio;
 import com.kmcontrol.dao.AtendimentoDao;
 import com.kmcontrol.dao.TabelaPrecoDao;
 import com.kmcontrol.entities.Atendimento;
@@ -58,7 +59,8 @@ public class PrestacaoContas {
     }
     
     public void geraPlanilha(){
-        
+        GeraRelatorio gr = new GeraRelatorio();
+        gr.gerar(dataInicial, dataFinal, tabelaPreco.getKm());
     }
 
 }

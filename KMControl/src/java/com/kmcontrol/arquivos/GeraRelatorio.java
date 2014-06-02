@@ -16,55 +16,39 @@ public class GeraRelatorio {
         atendimentos = atendimentoDao.listarAtendimento(null, dataInicial, dataFinal, "id");
         long totalKm = 0;
         double outrasDespesas = 0;
-        int cont;
+        int posicao = 0;
+        short init = 0;
+
 
         for (Atendimento atendimento : atendimentos) {
-            cont = atendimento.getId().intValue();
+            if (init == 0) {
+                posicao = atendimento.getUsuario().getId().intValue();
+                init = 1;
+            }
 
-            if (atendimento.getId().intValue() != cont) {
+            if (atendimento.getUsuario().getId().intValue() != posicao) {
                 dadosRelatorios.add(new DadosRelatorio(totalKm, outrasDespesas, totalKm * valorKm, atendimento.getUsuario().getLogin()));
                 totalKm = 0;
                 outrasDespesas = 0;
             }
 
             totalKm += atendimento.getKmfinal() - atendimento.getKminicial();
-            outrasDespesas += atendimento.getQtdAlimentacao() * atendimento.getValorAlimentacao();
-            outrasDespesas += atendimento.getQtdEstacionamento() * atendimento.getValorEstacionamento();
-            outrasDespesas += atendimento.getQtdHospedagem() * atendimento.getValorHospedagem();
-            outrasDespesas += atendimento.getQtdPedagio() * atendimento.getValorPedagio();
-
+            if (atendimento.getQtdAlimentacao() != null && atendimento.getValorAlimentacao() != null) {
+                outrasDespesas += atendimento.getQtdAlimentacao() * atendimento.getValorAlimentacao();
+            }
+            if (atendimento.getQtdEstacionamento() != null && atendimento.getValorEstacionamento() != null) {
+                outrasDespesas += atendimento.getQtdEstacionamento() * atendimento.getValorEstacionamento();
+            }
+            if (atendimento.getQtdHospedagem() != null && atendimento.getValorHospedagem() != null) {
+                outrasDespesas += atendimento.getQtdHospedagem() * atendimento.getValorHospedagem();
+            }
+            if (atendimento.getQtdPedagio() != null && atendimento.getValorPedagio() != null) {
+                outrasDespesas += atendimento.getQtdPedagio() * atendimento.getValorPedagio();
+            }
         }
 
-    }
-
-    private static class DadosRelatorio {
-
-        private long totalKm;
-        private double outrasDespesas;
-        private double valorTotal;
-        private String login;
-
-        public DadosRelatorio(long totalKm, double outrasDespesas, double valorTotal, String login) {
-            this.totalKm = totalKm;
-            this.outrasDespesas = outrasDespesas;
-            this.valorTotal = valorTotal;
-            this.login = login;
-        }
-
-        public long getTotalKm() {
-            return totalKm;
-        }
-
-        public double getOutrasDespesas() {
-            return outrasDespesas;
-        }
-
-        public double getValorTotal() {
-            return valorTotal;
-        }
-
-        public String getLogin() {
-            return login;
+        for (DadosRelatorio dr : dadosRelatorios) {
+            System.out.println(dr);
         }
 
     }

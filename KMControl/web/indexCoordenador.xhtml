@@ -155,6 +155,9 @@
                                                 <f:validator validatorId="primeDateRangeValidator" />
                                             </p:calendar>
                                         </p:column>
+                                        <p:column>
+                                            <p:commandButton label="OK" value="OK" ajax="false" action="#{PrestacaoContas.geraPlanilha()}" />
+                                        </p:column>
                                     </p:row>
                                 </p:panelGrid>
                             </h:form>
