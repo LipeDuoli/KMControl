@@ -1,23 +1,60 @@
 package com.kmcontrol.arquivos;
 
 import com.kmcontrol.dao.AtendimentoDao;
-import com.kmcontrol.entities.Atendimento;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class GeraRelatorio {
 
-    private List<Atendimento> atendimentos;
     private List<DadosRelatorio> dadosRelatorios;
 
     public void gerarXls(Date dataInicial, Date dataFinal, double valorKm) {
         AtendimentoDao atendimentoDao = new AtendimentoDao();
         dadosRelatorios = atendimentoDao.listaRelatorio(dataInicial, dataFinal);
-        
+
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet("Prestacao de conta");
+
+        Row header = sheet.createRow(1);
+        header.createCell(2).setCellValue("SOLCITACAO DE REQUERIMENTO");
+
+        Row cabecalho = sheet.createRow(7);
+        cabecalho.createCell(1).setCellValue("Descrição");
+        cabecalho.createCell(2).setCellValue("Reembolso KM");
+        cabecalho.createCell(3).setCellValue("Reembolso Outras Despesa");
+        cabecalho.createCell(4).setCellValue("Valor Total");
+        cabecalho.createCell(5).setCellValue("Dados Bancários");
+
+        int count = 8;
         for (DadosRelatorio d : dadosRelatorios) {
-            System.out.println(d);
+            Row dataRow = sheet.createRow(count++);
+            dataRow.createCell(1).setCellValue(d.getNome());
+            dataRow.createCell(2).setCellValue(d.getTotalKm());
+            dataRow.createCell(3).setCellValue(d.getOutrasDespesas());
+            dataRow.createCell(4).setCellValue(d.getTotalKm() * valorKm);
+            dataRow.createCell(5).setCellValue(d.getNomeBanco() + d.getAgencia() + d.getConta());
+
         }
-        
+
+        try {
+            FileOutputStream out = new FileOutputStream(new File("c:\\Requerimento.xlsx"));
+            workbook.write(out);
+            out.close();
+            System.out.println("Salvo!");
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }
