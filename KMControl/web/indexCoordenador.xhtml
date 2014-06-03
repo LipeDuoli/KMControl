@@ -29,7 +29,7 @@
                                                 <p:column>Técnico: </p:column>
                                                 <p:column>
                                                     <p:selectOneMenu value="#{AtendimentoCoordenador.loginUsuarioSelecionado}" >
-                                                        <f:selectItem itemLabel="Selecione..." noSelectionOption="true" /> 
+                                                        <f:selectItem itemLabel="Selecione..." itemValue="null" /> 
                                                         <f:selectItems id="tecnicos" 
                                                                        value="#{usuario.listaTecnicos}" 
                                                                        var="tecnicos" itemLabel="#{tecnicos.nome}" 
@@ -139,7 +139,8 @@
                                                         value="#{PrestacaoContas.dataInicial}"
                                                         locale="pt" 
                                                         pattern="dd/MM/yyyy" 
-                                                        label="#{ui['calendar.start']}" >
+                                                        label="Data Inicial"
+                                                        required="true">
                                                 <p:ajax event="dateSelect" update="endDate" />
                                             </p:calendar>
                                         </p:column>
@@ -150,7 +151,8 @@
                                                         locale="pt" 
                                                         pattern="dd/MM/yyyy" 
                                                         mindate="#{PrestacaoContas.dataInicial}"
-                                                        label="#{ui['calendar.end']}" >
+                                                        label="Data Final" 
+                                                        required="true">
                                                 <f:attribute name="startDate" value="#{PrestacaoContas.dataInicial}" />
                                                 <f:validator validatorId="primeDateRangeValidator" />
                                             </p:calendar>

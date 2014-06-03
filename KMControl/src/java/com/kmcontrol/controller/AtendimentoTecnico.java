@@ -61,6 +61,7 @@ public class AtendimentoTecnico {
         atendimentoDao = new AtendimentoDao();
         try {
             atendimento.setUsuario(usuarioDao.buscaLogin(SessionUtil.getLogin()));
+            removeNull();
             atendimentoDao.salvar(atendimento);
             FacesContext.getCurrentInstance().addMessage("messages", new FacesMessage(FacesMessage.SEVERITY_INFO, "Chamado registrado com exito.", "Chamado registrado com exito."));
             atendimento = new Atendimento();
@@ -103,5 +104,32 @@ public class AtendimentoTecnico {
 
     public void preparaAlterarChamado(Atendimento atendimento) {
         this.atendimento = atendimento;
+    }
+
+    private void removeNull() {
+        if (atendimento.getQtdAlimentacao() == null) {
+            atendimento.setQtdAlimentacao(0);
+        }
+        if (atendimento.getQtdEstacionamento() == null) {
+            atendimento.setQtdEstacionamento(0);
+        }
+        if (atendimento.getQtdHospedagem() == null) {
+            atendimento.setQtdHospedagem(0);
+        }
+        if (atendimento.getQtdPedagio() == null) {
+            atendimento.setQtdPedagio(0);
+        }
+        if (atendimento.getValorAlimentacao() == null) {
+            atendimento.setValorAlimentacao(0.0);
+        }
+        if (atendimento.getValorEstacionamento() == null) {
+            atendimento.setValorEstacionamento(0.0);
+        }
+        if (atendimento.getValorHospedagem() == null) {
+            atendimento.setValorHospedagem(0.0);
+        }
+        if (atendimento.getValorPedagio() == null) {
+            atendimento.setValorPedagio(0.0);
+        }
     }
 }

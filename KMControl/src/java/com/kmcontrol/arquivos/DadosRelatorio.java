@@ -1,38 +1,79 @@
 package com.kmcontrol.arquivos;
 
-class DadosRelatorio {
+public class DadosRelatorio {
 
     private long totalKm;
     private double outrasDespesas;
-    private double valorTotal;
-    private String login;
+    private String nome;
+    private String nomeBanco;
+    private Integer conta;
+    private Integer agencia;
 
-    public DadosRelatorio(long totalKm, double outrasDespesas, double valorTotal, String login) {
+    public DadosRelatorio() {
+    }
+
+    public DadosRelatorio(long totalKm, double outrasDespesas, String nome, String nomeBanco, Integer conta, Integer agencia) {
         this.totalKm = totalKm;
         this.outrasDespesas = outrasDespesas;
-        this.valorTotal = valorTotal;
-        this.login = login;
+        this.nome = nome;
+        this.nomeBanco = nomeBanco;
+        this.conta = conta;
+        this.agencia = agencia;
     }
 
     public long getTotalKm() {
         return totalKm;
     }
 
+    public void setTotalKm(long totalKm) {
+        this.totalKm = totalKm;
+    }
+
     public double getOutrasDespesas() {
         return outrasDespesas;
     }
 
-    public double getValorTotal() {
-        return valorTotal;
+    public void setOutrasDespesas(double outrasDespesas) {
+        this.outrasDespesas = outrasDespesas;
     }
 
-    public String getLogin() {
-        return login;
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getNomeBanco() {
+        return nomeBanco;
+    }
+
+    public void setNomeBanco(String nomeBanco) {
+        this.nomeBanco = nomeBanco;
+    }
+
+    public Integer getConta() {
+        return conta;
+    }
+
+    public void setConta(Integer conta) {
+        this.conta = conta;
+    }
+
+    public Integer getAgencia() {
+        return agencia;
+    }
+
+    public void setAgencia(Integer agencia) {
+        this.agencia = agencia;
     }
 
     @Override
     public String toString() {
-        return login + " | " + totalKm + " | " + outrasDespesas + " | " + valorTotal;
+        return nome + " | " + totalKm + " | " + outrasDespesas;
     }
-
+    
+    
+    
 }

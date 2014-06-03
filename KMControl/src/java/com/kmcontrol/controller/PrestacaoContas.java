@@ -5,19 +5,18 @@ import com.kmcontrol.dao.AtendimentoDao;
 import com.kmcontrol.dao.TabelaPrecoDao;
 import com.kmcontrol.entities.Atendimento;
 import com.kmcontrol.entities.TabelaPreco;
+import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 @ManagedBean(name = "PrestacaoContas")
 @ViewScoped
-public class PrestacaoContas {
+public class PrestacaoContas implements Serializable {
 
     private TabelaPreco tabelaPreco;
-    private TabelaPrecoDao tabelaPrecoDao = new TabelaPrecoDao();
-    private List<Atendimento> atendimentos;
+    private final TabelaPrecoDao tabelaPrecoDao = new TabelaPrecoDao();
     private Date dataInicial;
     private Date dataFinal;
 
@@ -60,7 +59,7 @@ public class PrestacaoContas {
     
     public void geraPlanilha(){
         GeraRelatorio gr = new GeraRelatorio();
-        gr.gerar(dataInicial, dataFinal, tabelaPreco.getKm());
+        gr.gerarXls(dataInicial, dataFinal, tabelaPreco.getKm());
     }
 
 }

@@ -1,5 +1,6 @@
 package com.kmcontrol.dao;
 
+import com.kmcontrol.arquivos.DadosRelatorio;
 import com.kmcontrol.entities.Atendimento;
 import com.kmcontrol.entities.Usuario;
 import com.kmcontrol.util.HibernateUtil;
@@ -82,9 +83,7 @@ public class AtendimentoDao implements IDao {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             Criteria criteria = session.createCriteria(Atendimento.class);
-            if (usuario != null) {
-                criteria.add(Restrictions.eq("usuario", usuario));
-            }
+            criteria.add(Restrictions.eq("usuario", usuario));
             if (dataInicial != null) {
                 criteria.add(Expression.ge("data", dataInicial));
             }
@@ -98,6 +97,33 @@ public class AtendimentoDao implements IDao {
         } finally {
             session.close();
         }
+    }
+
+    public List<DadosRelatorio> listaRelatorio(Date dataInicial, Date dataFinal) {
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("SELECT NEW com.kmcontrol.arquivos.DadosRelatorio(sum(a.kmfinal - a.kminicial), "
+                    + "sum( (a.qtdHospedagem * a.valorHospedagem) + (a.qtdPedagio * a.valorPedagio) + (a.qtdEstacionamento * a.valorEstacionamento) + (a.qtdAlimentacao * a.valorAlimentacao)), "
+                    + "a.usuario.nome, "
+                    + "a.usuario.nomeBanco, "
+                    + "a.usuario.conta, "
+                    + "a.usuario.agencia) "
+                    + "FROM Atendimento a "
+                    + "WHERE a.data BETWEEN :datainicial AND :datafinal "
+                    + "GROUP BY a.usuario.id "
+                    + "ORDER BY a.usuario.nome ASC");
+            query.setParameter("datainicial", dataInicial);
+            query.setParameter("datafinal", dataFinal);
+            return query.list();
+        } catch (HibernateException he) {
+            return null;
+        } catch (Exception e) {
+            return null;
+        } finally {
+            session.close();
+        }
+
     }
 
 }
