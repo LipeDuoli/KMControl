@@ -37,13 +37,13 @@ public class GeraRelatorio {
         cabecalho.createCell(5).setCellValue("Dados Bancários");
 
         int count = 8;
-        for (DadosRelatorio d : dadosRelatorios) {
+        for (DadosRelatorio dr : dadosRelatorios) {
             Row dataRow = sheet.createRow(count++);
-            dataRow.createCell(1).setCellValue(d.getNome());
-            dataRow.createCell(2).setCellValue(d.getTotalKm());
-            dataRow.createCell(3).setCellValue(d.getOutrasDespesas());
-            dataRow.createCell(4).setCellValue(d.getTotalKm() * valorKm + d.getOutrasDespesas());
-            dataRow.createCell(5).setCellValue("Banco: " + d.getNomeBanco() +"\nAgencia: "+ d.getAgencia() +"\nConta: "+ d.getConta());
+            dataRow.createCell(1).setCellValue(dr.getNome());
+            dataRow.createCell(2).setCellValue(dr.getTotalKm());
+            dataRow.createCell(3).setCellValue("R$ " + dr.getOutrasDespesas());
+            dataRow.createCell(4).setCellValue("R$ " + dr.getTotalKm() * valorKm + dr.getOutrasDespesas());
+            dataRow.createCell(5).setCellValue("Banco: " + dr.getNomeBanco() +"\nAgencia: "+ dr.getAgencia() +"\nConta: "+ dr.getConta());
             dataRow.getCell(5).setCellStyle(cs);
 
         }
