@@ -1,4 +1,5 @@
 KMControl
 =========
+Software para controle de atendimento de chamados.
 
-KMControl
+-Trabalho de faculdade utilizando tecnologias aprendidas no semestre.
